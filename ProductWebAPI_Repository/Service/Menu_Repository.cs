@@ -30,20 +30,28 @@ namespace ProductWebAPI_Repository.Service
         {
             try
             {
-                List<MainMenuModel> MainMenuList = new List<MainMenuModel>(); 
+                List<MainMenuModel> MainMenuList = new List<MainMenuModel>();
                 var menudata = (from C in context.CounterDets.Where(x => x.CrId == CrId)
-                                    join M in context.MainMenuMsts.Where(x => x.Valid == 1) on C.MainMenuMstID equals M.MainMenuMstID
-                                    select new MainMenuModel
-                                    {
-                                        MainMenuMstID = M.MainMenuMstID,
-                                        MainMenuName = M.MainMenuName,
-                                        SubMenuList = (from S in context.MainGroupMsts.Where(x => x.MainMenuMstID == M.MainMenuMstID && x.Valid == 1)
-                                                       select new SubMenuModel
-                                                       {
-                                                           MainGroupMstID = S.MainGroupMstID,
-                                                           MainGroupName = S.MainGroupName
-                                                       }).ToList()
-                                    }).AsQueryable();
+                                join M in context.MainMenuMsts.Where(x => x.Valid == 1) on C.MainMenuMstID equals M.MainMenuMstID
+                                select new MainMenuModel
+                                {
+                                    MainMenuMstID = M.MainMenuMstID,
+                                    MainMenuName = M.MainMenuName,
+                                    Groups = (from S in context.MainGroupMsts.Where(x => x.MainMenuMstID == M.MainMenuMstID && x.Valid == 1)
+                                              select new SubMenuModel
+                                              {
+                                                  MainGroupMstID = S.MainGroupMstID,
+                                                  MainGroupName = S.MainGroupName,
+                                                  SubMenu = context.MenuMsts.Where(x => x.MainMenuMstID == C.MainMenuMstID &&
+                                                                                        x.MainGroupMstID == S.MainGroupMstID && x.Valid == 1).
+                                                                                        Select(c => new Menu()
+                                                                                        {
+                                                                                            MenuMstID = c.MenuMstID,
+                                                                                            MenuName = c.MenuName,
+                                                                                            MenuImage = c.MenuImage
+                                                                                        }).ToList()
+                                              }).ToList()
+                                }).AsQueryable();
 
                 foreach (var M in menudata)
                 {
@@ -53,10 +61,10 @@ namespace ProductWebAPI_Repository.Service
                     {
                         mData.MainMenuMstID = M.MainMenuMstID;
                         mData.MainMenuName = M.MainMenuName;
-                        mData.SubMenuList = M.SubMenuList;
+                        mData.Groups = M.Groups;
                         MainMenuList.Add(mData);
                     }
-                } 
+                }
                 return MainMenuList;
             }
             catch (Exception ex)
@@ -66,7 +74,7 @@ namespace ProductWebAPI_Repository.Service
             }
         }
 
-    #region IDisposable Support
+        #region IDisposable Support
         private bool disposedValue = false; // To detect redundant calls
 
         protected virtual void Dispose(bool disposing)
@@ -86,6 +94,6 @@ namespace ProductWebAPI_Repository.Service
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-    #endregion
-}
+        #endregion
+    }
 }

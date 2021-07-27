@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9ba61ec56f594d64ac87b8fa191ac2ff" Name="Diagram1" ZoomLevel="78">
+      <Diagram DiagramId="9ba61ec56f594d64ac87b8fa191ac2ff" Name="Diagram1" ZoomLevel="46">
         <EntityTypeShape EntityType="MED_GENMEDModel.AdMst" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MED_GENMEDModel.AreaMst" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MED_GENMEDModel.BatchMst" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
@@ -86,6 +86,8 @@
         <AssociationConnector Association="MED_GENMEDModel.FK_Stockist_SaleReturnDetID_TaxMst" ManuallyRouted="false" />
         <AssociationConnector Association="MED_GENMEDModel.FK_Stockist_SaleReturnDetID_UnitMst" ManuallyRouted="false" />
         <EntityTypeShape EntityType="MED_GENMEDModel.ProductMst" Width="1.5" PointX="11.375" PointY="28.75" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.Stock_Genmed" Width="1.5" PointX="13.375" PointY="28.75" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.Stock_Stockist" Width="1.5" PointX="21.375" PointY="28.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

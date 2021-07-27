@@ -93,6 +93,8 @@ namespace ProductWebAPI_Repository.Data
         public virtual DbSet<MSpeer_originatorid_history> MSpeer_originatorid_history { get; set; }
         public virtual DbSet<TmpGiftReportMst> TmpGiftReportMsts { get; set; }
         public virtual DbSet<ProductMst> ProductMsts { get; set; }
+        public virtual DbSet<Stock_Genmed> Stock_Genmed { get; set; }
+        public virtual DbSet<Stock_Stockist> Stock_Stockist { get; set; }
     
         public virtual int ProductMst_bulkdelete(Nullable<long> sync_min_timestamp, Nullable<int> sync_scope_local_id)
         {
@@ -1555,6 +1557,19 @@ namespace ProductWebAPI_Repository.Data
                 new ObjectParameter("c22", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_MSins_dboStockist_SaleInvoiceMst_msrepl_ccs", c1Parameter, c2Parameter, c3Parameter, c4Parameter, c5Parameter, c6Parameter, c7Parameter, c8Parameter, c9Parameter, c10Parameter, c11Parameter, c12Parameter, c13Parameter, c14Parameter, c15Parameter, c16Parameter, c17Parameter, c18Parameter, c19Parameter, c20Parameter, c21Parameter, c22Parameter);
+        }
+    
+        public virtual ObjectResult<GetAllProductsAPI_Result> GetAllProductsAPI(string type, Nullable<int> userId)
+        {
+            var typeParameter = type != null ?
+                new ObjectParameter("Type", type) :
+                new ObjectParameter("Type", typeof(string));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllProductsAPI_Result>("GetAllProductsAPI", typeParameter, userIdParameter);
         }
     }
 }

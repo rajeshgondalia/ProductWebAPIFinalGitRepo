@@ -987,6 +987,73 @@ warning 6002: The table/view 'MED_GENMED.dbo.MSpeer_originatorid_history' does n
           <Property Name="Ever" Type="int" />
           <Property Name="CompanyCode" Type="int" />
         </EntityType>
+        <EntityType Name="Stock_Genmed">
+          <Key>
+            <PropertyRef Name="GenStockMstID" />
+          </Key>
+          <Property Name="GenStockMstID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BCode" Type="int" />
+          <Property Name="SupplierCode" Type="int" />
+          <Property Name="BillNo" Type="int" />
+          <Property Name="BillDate" Type="datetime" />
+          <Property Name="ChallanNo" Type="varchar" MaxLength="50" />
+          <Property Name="ChallanDate" Type="datetime" />
+          <Property Name="ProductCode" Type="int" />
+          <Property Name="BatchNo" Type="varchar" MaxLength="30" />
+          <Property Name="ExpiryDate" Type="varchar" MaxLength="20" />
+          <Property Name="GodownCode" Type="tinyint" />
+          <Property Name="RackCode" Type="tinyint" />
+          <Property Name="Box" Type="varchar" MaxLength="50" />
+          <Property Name="QtyInUnit" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="QtyInStrip" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="QtyInBox" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="QtyInCartoon" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="FreeQtyInUnit" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="FreeQtyInStrip" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="FreeQtyInBox" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="FreeQtyInCartoon" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PurRetQtyInUnit" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PurRetQtyInStrip" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PurRetQtyInBox" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PurRetQtyInCartoon" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="MRP" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PurRate" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PurAmt" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PurDisc" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PurDiscAmt" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="NetRate" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PurGst" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PurGstAmt" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="MarginMstID" Type="int" />
+          <Property Name="SalQtyInUnit" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="SalQtyInStrip" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="SalQtyInBox" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="SalQtyInCartoon" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="SalRetQtyInUnit" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="SalRetQtyInStrip" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="SalRetQtyInBox" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="SalRetQtyInCartoon" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="SalRate" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="SalAmt" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="SalDisc" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="SalDiscAmt" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="SalGst" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="SalGstAmt" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="SalCGST" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="SalCAMT" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="SalSGST" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="SalSAmt" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="TotalAmt" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PurFreeProduct" Type="bit" />
+          <Property Name="DetID" Type="int" />
+          <Property Name="MstID" Type="int" />
+          <Property Name="Process" Type="varchar" MaxLength="50" />
+          <Property Name="FormName" Type="varchar" MaxLength="50" />
+          <Property Name="TableName" Type="varchar" MaxLength="50" />
+          <Property Name="LogID" Type="int" />
+          <Property Name="PcID" Type="varchar" MaxLength="50" />
+          <Property Name="Sdate" Type="datetime" />
+        </EntityType>
         <EntityType Name="Stock_Medical">
           <Key>
             <PropertyRef Name="MedcalStockMstID" />
@@ -1046,6 +1113,74 @@ warning 6002: The table/view 'MED_GENMED.dbo.MSpeer_originatorid_history' does n
           <Property Name="LogID" Type="int" />
           <Property Name="PcID" Type="varchar" MaxLength="50" />
           <Property Name="Sdate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Stock_Stockist">
+          <Key>
+            <PropertyRef Name="Stockist_StockMstID" />
+          </Key>
+          <Property Name="Stockist_StockMstID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BCode" Type="int" />
+          <Property Name="BranchCode" Type="int" />
+          <Property Name="BillNo" Type="int" />
+          <Property Name="BillDate" Type="datetime" />
+          <Property Name="ChallanNo" Type="varchar" MaxLength="50" />
+          <Property Name="ChallanDate" Type="datetime" />
+          <Property Name="ProductCode" Type="int" />
+          <Property Name="BatchNo" Type="varchar" MaxLength="30" />
+          <Property Name="ExpiryDate" Type="varchar" MaxLength="20" />
+          <Property Name="GodownCode" Type="tinyint" />
+          <Property Name="RackCode" Type="tinyint" />
+          <Property Name="Box" Type="varchar" MaxLength="50" />
+          <Property Name="QtyInUnit" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="QtyInStrip" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="QtyInBox" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="QtyInCartoon" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="FreeQtyInUnit" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="FreeQtyInStrip" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="FreeQtyInBox" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="FreeQtyInCartoon" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="MRP" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PurRate" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PurAmt" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PurDisc" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PurDiscAmt" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="NetRate" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PurGst" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PurGstAmt" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="MarginMstID" Type="int" />
+          <Property Name="SalQtyInUnit" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="SalQtyInStrip" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="SalQtyInBox" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="SalQtyInCartoon" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="SalRate" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="SalAmt" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="SalDisc" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="SalDiscAmt" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="SalCGST" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="SalCAMT" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="SalSGST" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="SalSAmt" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="SalGst" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="SalGstAmt" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="TotalAmt" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PurFreeProduct" Type="bit" />
+          <Property Name="DetID" Type="int" />
+          <Property Name="MstID" Type="int" />
+          <Property Name="Process" Type="varchar" MaxLength="50" />
+          <Property Name="FormName" Type="varchar" MaxLength="50" />
+          <Property Name="TableName" Type="varchar" MaxLength="50" />
+          <Property Name="LogID" Type="int" />
+          <Property Name="PcID" Type="varchar" MaxLength="50" />
+          <Property Name="Sdate" Type="datetime" />
+          <Property Name="MBranchCode" Type="int" />
+          <Property Name="SalRetQtyInUnit" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="SalRetQtyInStrip" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="SalRetQtyInBox" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="SalRetQtyInCartoon" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PurRetQtyInUnit" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PurRetQtyInStrip" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PurRetQtyInBox" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PurRetQtyInCartoon" Type="numeric" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="Stockist_SaleInvoiceDet">
           <Key>
@@ -1539,6 +1674,10 @@ warning 6002: The table/view 'MED_GENMED.dbo.TmpGiftReportMst' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="GetAllProductsAPI" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Type" Type="varchar" Mode="In" />
+          <Parameter Name="UserId" Type="int" Mode="In" />
+        </Function>
         <Function Name="ProductMst_bulkdelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="sync_min_timestamp" Type="bigint" Mode="In" />
           <Parameter Name="sync_scope_local_id" Type="int" Mode="In" />
@@ -1986,7 +2125,9 @@ warning 6002: The table/view 'MED_GENMED.dbo.TmpGiftReportMst' does not have a p
           <EntitySet Name="ReportMst" EntityType="Self.ReportMst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReportTypeMst" EntityType="Self.ReportTypeMst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StateMst" EntityType="Self.StateMst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stock_Genmed" EntityType="Self.Stock_Genmed" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Stock_Medical" EntityType="Self.Stock_Medical" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stock_Stockist" EntityType="Self.Stock_Stockist" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Stockist_SaleInvoiceDet" EntityType="Self.Stockist_SaleInvoiceDet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Stockist_SaleInvoiceDet_1" EntityType="Self.Stockist_SaleInvoiceDet_1" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Stockist_SaleInvoiceMst" EntityType="Self.Stockist_SaleInvoiceMst" Schema="dbo" store:Type="Tables" />
@@ -4198,6 +4339,12 @@ warning 6002: The table/view 'MED_GENMED.dbo.TmpGiftReportMst' does not have a p
             <Parameter Name="c22" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="ProductMsts" EntityType="MED_GENMEDModel.ProductMst" />
+          <EntitySet Name="Stock_Genmed" EntityType="MED_GENMEDModel.Stock_Genmed" />
+          <EntitySet Name="Stock_Stockist" EntityType="MED_GENMEDModel.Stock_Stockist" />
+          <FunctionImport Name="GetAllProductsAPI" ReturnType="Collection(MED_GENMEDModel.GetAllProductsAPI_Result)">
+            <Parameter Name="Type" Mode="In" Type="String" />
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="ProductMst">
           <Key>
@@ -4247,6 +4394,186 @@ warning 6002: The table/view 'MED_GENMED.dbo.TmpGiftReportMst' does not have a p
           <Property Name="LeftImage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DescImage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Stock_Genmed">
+          <Key>
+            <PropertyRef Name="GenStockMstID" />
+          </Key>
+          <Property Name="GenStockMstID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BCode" Type="Int32" />
+          <Property Name="SupplierCode" Type="Int32" />
+          <Property Name="BillNo" Type="Int32" />
+          <Property Name="BillDate" Type="DateTime" Precision="3" />
+          <Property Name="ChallanNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ChallanDate" Type="DateTime" Precision="3" />
+          <Property Name="ProductCode" Type="Int32" />
+          <Property Name="BatchNo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ExpiryDate" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="GodownCode" Type="Byte" />
+          <Property Name="RackCode" Type="Byte" />
+          <Property Name="Box" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="QtyInUnit" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="QtyInStrip" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="QtyInBox" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="QtyInCartoon" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="FreeQtyInUnit" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="FreeQtyInStrip" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="FreeQtyInBox" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="FreeQtyInCartoon" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PurRetQtyInUnit" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PurRetQtyInStrip" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PurRetQtyInBox" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PurRetQtyInCartoon" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="MRP" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PurRate" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PurAmt" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PurDisc" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PurDiscAmt" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="NetRate" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PurGst" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PurGstAmt" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="MarginMstID" Type="Int32" />
+          <Property Name="SalQtyInUnit" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SalQtyInStrip" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SalQtyInBox" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SalQtyInCartoon" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SalRetQtyInUnit" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SalRetQtyInStrip" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SalRetQtyInBox" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SalRetQtyInCartoon" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SalRate" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SalAmt" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SalDisc" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SalDiscAmt" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SalGst" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SalGstAmt" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SalCGST" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SalCAMT" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SalSGST" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SalSAmt" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TotalAmt" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PurFreeProduct" Type="Boolean" />
+          <Property Name="DetID" Type="Int32" />
+          <Property Name="MstID" Type="Int32" />
+          <Property Name="Process" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FormName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TableName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LogID" Type="Int32" />
+          <Property Name="PcID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Sdate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Stock_Stockist">
+          <Key>
+            <PropertyRef Name="Stockist_StockMstID" />
+          </Key>
+          <Property Name="Stockist_StockMstID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BCode" Type="Int32" />
+          <Property Name="BranchCode" Type="Int32" />
+          <Property Name="BillNo" Type="Int32" />
+          <Property Name="BillDate" Type="DateTime" Precision="3" />
+          <Property Name="ChallanNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ChallanDate" Type="DateTime" Precision="3" />
+          <Property Name="ProductCode" Type="Int32" />
+          <Property Name="BatchNo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ExpiryDate" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="GodownCode" Type="Byte" />
+          <Property Name="RackCode" Type="Byte" />
+          <Property Name="Box" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="QtyInUnit" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="QtyInStrip" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="QtyInBox" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="QtyInCartoon" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="FreeQtyInUnit" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="FreeQtyInStrip" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="FreeQtyInBox" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="FreeQtyInCartoon" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="MRP" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PurRate" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PurAmt" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PurDisc" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PurDiscAmt" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="NetRate" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PurGst" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PurGstAmt" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="MarginMstID" Type="Int32" />
+          <Property Name="SalQtyInUnit" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SalQtyInStrip" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SalQtyInBox" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SalQtyInCartoon" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SalRate" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SalAmt" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SalDisc" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SalDiscAmt" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SalCGST" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SalCAMT" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SalSGST" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SalSAmt" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SalGst" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SalGstAmt" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TotalAmt" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PurFreeProduct" Type="Boolean" />
+          <Property Name="DetID" Type="Int32" />
+          <Property Name="MstID" Type="Int32" />
+          <Property Name="Process" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FormName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TableName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LogID" Type="Int32" />
+          <Property Name="PcID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Sdate" Type="DateTime" Precision="3" />
+          <Property Name="MBranchCode" Type="Int32" />
+          <Property Name="SalRetQtyInUnit" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SalRetQtyInStrip" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SalRetQtyInBox" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SalRetQtyInCartoon" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PurRetQtyInUnit" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PurRetQtyInStrip" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PurRetQtyInBox" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PurRetQtyInCartoon" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <ComplexType Name="GetAllProductsAPI_Result">
+          <Property Type="Int32" Name="ProductMstID" Nullable="false" />
+          <Property Type="Int32" Name="ProductCode" Nullable="false" />
+          <Property Type="String" Name="ProductName" Nullable="true" />
+          <Property Type="Int32" Name="SubProductCode" Nullable="true" />
+          <Property Type="Int32" Name="GenericCode" Nullable="true" />
+          <Property Type="Int32" Name="MfgCompanyCode" Nullable="true" />
+          <Property Type="Int32" Name="MktCompanyCode" Nullable="true" />
+          <Property Type="Int32" Name="MfgCompanyCode1" Nullable="true" />
+          <Property Type="Int32" Name="DiseaseCode" Nullable="true" />
+          <Property Type="Byte" Name="StorageCode" Nullable="true" />
+          <Property Type="Int32" Name="TabletTypeCode" Nullable="true" />
+          <Property Type="Decimal" Name="Tax" Nullable="true" Precision="7" Scale="2" />
+          <Property Type="String" Name="HSNCode" Nullable="true" MaxLength="30" />
+          <Property Type="Decimal" Name="Qty" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="NoOfQty" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="TotQty" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Byte" Name="UnitCode" Nullable="true" />
+          <Property Type="String" Name="Packing" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="QtyBox" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="QtyCartoon" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="MaxStock" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="MinStock" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="OpeningStock" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="SortID" Nullable="true" />
+          <Property Type="Boolean" Name="Active" Nullable="true" />
+          <Property Type="String" Name="Sflag" Nullable="true" MaxLength="1" />
+          <Property Type="DateTime" Name="Sdate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="LogID" Nullable="true" />
+          <Property Type="String" Name="PcID" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Ever" Nullable="true" />
+          <Property Type="Int32" Name="CompanyCode" Nullable="true" />
+          <Property Type="String" Name="Contain" Nullable="true" MaxLength="250" />
+          <Property Type="Boolean" Name="Pharma" Nullable="true" />
+          <Property Type="Boolean" Name="Wellness" Nullable="true" />
+          <Property Type="Boolean" Name="Online" Nullable="true" />
+          <Property Type="Byte" Name="ScheduleCode" Nullable="true" />
+          <Property Type="Boolean" Name="DPCO" Nullable="true" />
+          <Property Type="DateTime" Name="ProductDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="FrontImage" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="BackImage" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="RightImage" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LeftImage" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DescImage" Nullable="true" MaxLength="50" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5687,6 +6014,192 @@ warning 6002: The table/view 'MED_GENMED.dbo.TmpGiftReportMst' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Stock_Genmed">
+            <EntityTypeMapping TypeName="MED_GENMEDModel.Stock_Genmed">
+              <MappingFragment StoreEntitySet="Stock_Genmed">
+                <ScalarProperty Name="Sdate" ColumnName="Sdate" />
+                <ScalarProperty Name="PcID" ColumnName="PcID" />
+                <ScalarProperty Name="LogID" ColumnName="LogID" />
+                <ScalarProperty Name="TableName" ColumnName="TableName" />
+                <ScalarProperty Name="FormName" ColumnName="FormName" />
+                <ScalarProperty Name="Process" ColumnName="Process" />
+                <ScalarProperty Name="MstID" ColumnName="MstID" />
+                <ScalarProperty Name="DetID" ColumnName="DetID" />
+                <ScalarProperty Name="PurFreeProduct" ColumnName="PurFreeProduct" />
+                <ScalarProperty Name="TotalAmt" ColumnName="TotalAmt" />
+                <ScalarProperty Name="SalSAmt" ColumnName="SalSAmt" />
+                <ScalarProperty Name="SalSGST" ColumnName="SalSGST" />
+                <ScalarProperty Name="SalCAMT" ColumnName="SalCAMT" />
+                <ScalarProperty Name="SalCGST" ColumnName="SalCGST" />
+                <ScalarProperty Name="SalGstAmt" ColumnName="SalGstAmt" />
+                <ScalarProperty Name="SalGst" ColumnName="SalGst" />
+                <ScalarProperty Name="SalDiscAmt" ColumnName="SalDiscAmt" />
+                <ScalarProperty Name="SalDisc" ColumnName="SalDisc" />
+                <ScalarProperty Name="SalAmt" ColumnName="SalAmt" />
+                <ScalarProperty Name="SalRate" ColumnName="SalRate" />
+                <ScalarProperty Name="SalRetQtyInCartoon" ColumnName="SalRetQtyInCartoon" />
+                <ScalarProperty Name="SalRetQtyInBox" ColumnName="SalRetQtyInBox" />
+                <ScalarProperty Name="SalRetQtyInStrip" ColumnName="SalRetQtyInStrip" />
+                <ScalarProperty Name="SalRetQtyInUnit" ColumnName="SalRetQtyInUnit" />
+                <ScalarProperty Name="SalQtyInCartoon" ColumnName="SalQtyInCartoon" />
+                <ScalarProperty Name="SalQtyInBox" ColumnName="SalQtyInBox" />
+                <ScalarProperty Name="SalQtyInStrip" ColumnName="SalQtyInStrip" />
+                <ScalarProperty Name="SalQtyInUnit" ColumnName="SalQtyInUnit" />
+                <ScalarProperty Name="MarginMstID" ColumnName="MarginMstID" />
+                <ScalarProperty Name="PurGstAmt" ColumnName="PurGstAmt" />
+                <ScalarProperty Name="PurGst" ColumnName="PurGst" />
+                <ScalarProperty Name="NetRate" ColumnName="NetRate" />
+                <ScalarProperty Name="PurDiscAmt" ColumnName="PurDiscAmt" />
+                <ScalarProperty Name="PurDisc" ColumnName="PurDisc" />
+                <ScalarProperty Name="PurAmt" ColumnName="PurAmt" />
+                <ScalarProperty Name="PurRate" ColumnName="PurRate" />
+                <ScalarProperty Name="MRP" ColumnName="MRP" />
+                <ScalarProperty Name="PurRetQtyInCartoon" ColumnName="PurRetQtyInCartoon" />
+                <ScalarProperty Name="PurRetQtyInBox" ColumnName="PurRetQtyInBox" />
+                <ScalarProperty Name="PurRetQtyInStrip" ColumnName="PurRetQtyInStrip" />
+                <ScalarProperty Name="PurRetQtyInUnit" ColumnName="PurRetQtyInUnit" />
+                <ScalarProperty Name="FreeQtyInCartoon" ColumnName="FreeQtyInCartoon" />
+                <ScalarProperty Name="FreeQtyInBox" ColumnName="FreeQtyInBox" />
+                <ScalarProperty Name="FreeQtyInStrip" ColumnName="FreeQtyInStrip" />
+                <ScalarProperty Name="FreeQtyInUnit" ColumnName="FreeQtyInUnit" />
+                <ScalarProperty Name="QtyInCartoon" ColumnName="QtyInCartoon" />
+                <ScalarProperty Name="QtyInBox" ColumnName="QtyInBox" />
+                <ScalarProperty Name="QtyInStrip" ColumnName="QtyInStrip" />
+                <ScalarProperty Name="QtyInUnit" ColumnName="QtyInUnit" />
+                <ScalarProperty Name="Box" ColumnName="Box" />
+                <ScalarProperty Name="RackCode" ColumnName="RackCode" />
+                <ScalarProperty Name="GodownCode" ColumnName="GodownCode" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="BatchNo" ColumnName="BatchNo" />
+                <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+                <ScalarProperty Name="ChallanDate" ColumnName="ChallanDate" />
+                <ScalarProperty Name="ChallanNo" ColumnName="ChallanNo" />
+                <ScalarProperty Name="BillDate" ColumnName="BillDate" />
+                <ScalarProperty Name="BillNo" ColumnName="BillNo" />
+                <ScalarProperty Name="SupplierCode" ColumnName="SupplierCode" />
+                <ScalarProperty Name="BCode" ColumnName="BCode" />
+                <ScalarProperty Name="GenStockMstID" ColumnName="GenStockMstID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stock_Stockist">
+            <EntityTypeMapping TypeName="MED_GENMEDModel.Stock_Stockist">
+              <MappingFragment StoreEntitySet="Stock_Stockist">
+                <ScalarProperty Name="PurRetQtyInCartoon" ColumnName="PurRetQtyInCartoon" />
+                <ScalarProperty Name="PurRetQtyInBox" ColumnName="PurRetQtyInBox" />
+                <ScalarProperty Name="PurRetQtyInStrip" ColumnName="PurRetQtyInStrip" />
+                <ScalarProperty Name="PurRetQtyInUnit" ColumnName="PurRetQtyInUnit" />
+                <ScalarProperty Name="SalRetQtyInCartoon" ColumnName="SalRetQtyInCartoon" />
+                <ScalarProperty Name="SalRetQtyInBox" ColumnName="SalRetQtyInBox" />
+                <ScalarProperty Name="SalRetQtyInStrip" ColumnName="SalRetQtyInStrip" />
+                <ScalarProperty Name="SalRetQtyInUnit" ColumnName="SalRetQtyInUnit" />
+                <ScalarProperty Name="MBranchCode" ColumnName="MBranchCode" />
+                <ScalarProperty Name="Sdate" ColumnName="Sdate" />
+                <ScalarProperty Name="PcID" ColumnName="PcID" />
+                <ScalarProperty Name="LogID" ColumnName="LogID" />
+                <ScalarProperty Name="TableName" ColumnName="TableName" />
+                <ScalarProperty Name="FormName" ColumnName="FormName" />
+                <ScalarProperty Name="Process" ColumnName="Process" />
+                <ScalarProperty Name="MstID" ColumnName="MstID" />
+                <ScalarProperty Name="DetID" ColumnName="DetID" />
+                <ScalarProperty Name="PurFreeProduct" ColumnName="PurFreeProduct" />
+                <ScalarProperty Name="TotalAmt" ColumnName="TotalAmt" />
+                <ScalarProperty Name="SalGstAmt" ColumnName="SalGstAmt" />
+                <ScalarProperty Name="SalGst" ColumnName="SalGst" />
+                <ScalarProperty Name="SalSAmt" ColumnName="SalSAmt" />
+                <ScalarProperty Name="SalSGST" ColumnName="SalSGST" />
+                <ScalarProperty Name="SalCAMT" ColumnName="SalCAMT" />
+                <ScalarProperty Name="SalCGST" ColumnName="SalCGST" />
+                <ScalarProperty Name="SalDiscAmt" ColumnName="SalDiscAmt" />
+                <ScalarProperty Name="SalDisc" ColumnName="SalDisc" />
+                <ScalarProperty Name="SalAmt" ColumnName="SalAmt" />
+                <ScalarProperty Name="SalRate" ColumnName="SalRate" />
+                <ScalarProperty Name="SalQtyInCartoon" ColumnName="SalQtyInCartoon" />
+                <ScalarProperty Name="SalQtyInBox" ColumnName="SalQtyInBox" />
+                <ScalarProperty Name="SalQtyInStrip" ColumnName="SalQtyInStrip" />
+                <ScalarProperty Name="SalQtyInUnit" ColumnName="SalQtyInUnit" />
+                <ScalarProperty Name="MarginMstID" ColumnName="MarginMstID" />
+                <ScalarProperty Name="PurGstAmt" ColumnName="PurGstAmt" />
+                <ScalarProperty Name="PurGst" ColumnName="PurGst" />
+                <ScalarProperty Name="NetRate" ColumnName="NetRate" />
+                <ScalarProperty Name="PurDiscAmt" ColumnName="PurDiscAmt" />
+                <ScalarProperty Name="PurDisc" ColumnName="PurDisc" />
+                <ScalarProperty Name="PurAmt" ColumnName="PurAmt" />
+                <ScalarProperty Name="PurRate" ColumnName="PurRate" />
+                <ScalarProperty Name="MRP" ColumnName="MRP" />
+                <ScalarProperty Name="FreeQtyInCartoon" ColumnName="FreeQtyInCartoon" />
+                <ScalarProperty Name="FreeQtyInBox" ColumnName="FreeQtyInBox" />
+                <ScalarProperty Name="FreeQtyInStrip" ColumnName="FreeQtyInStrip" />
+                <ScalarProperty Name="FreeQtyInUnit" ColumnName="FreeQtyInUnit" />
+                <ScalarProperty Name="QtyInCartoon" ColumnName="QtyInCartoon" />
+                <ScalarProperty Name="QtyInBox" ColumnName="QtyInBox" />
+                <ScalarProperty Name="QtyInStrip" ColumnName="QtyInStrip" />
+                <ScalarProperty Name="QtyInUnit" ColumnName="QtyInUnit" />
+                <ScalarProperty Name="Box" ColumnName="Box" />
+                <ScalarProperty Name="RackCode" ColumnName="RackCode" />
+                <ScalarProperty Name="GodownCode" ColumnName="GodownCode" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="BatchNo" ColumnName="BatchNo" />
+                <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+                <ScalarProperty Name="ChallanDate" ColumnName="ChallanDate" />
+                <ScalarProperty Name="ChallanNo" ColumnName="ChallanNo" />
+                <ScalarProperty Name="BillDate" ColumnName="BillDate" />
+                <ScalarProperty Name="BillNo" ColumnName="BillNo" />
+                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+                <ScalarProperty Name="BCode" ColumnName="BCode" />
+                <ScalarProperty Name="Stockist_StockMstID" ColumnName="Stockist_StockMstID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetAllProductsAPI" FunctionName="MED_GENMEDModel.Store.GetAllProductsAPI">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MED_GENMEDModel.GetAllProductsAPI_Result">
+                <ScalarProperty Name="ProductMstID" ColumnName="ProductMstID" />
+                <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="SubProductCode" ColumnName="SubProductCode" />
+                <ScalarProperty Name="GenericCode" ColumnName="GenericCode" />
+                <ScalarProperty Name="MfgCompanyCode" ColumnName="MfgCompanyCode" />
+                <ScalarProperty Name="MktCompanyCode" ColumnName="MktCompanyCode" />
+                <ScalarProperty Name="MfgCompanyCode1" ColumnName="MfgCompanyCode1" />
+                <ScalarProperty Name="DiseaseCode" ColumnName="DiseaseCode" />
+                <ScalarProperty Name="StorageCode" ColumnName="StorageCode" />
+                <ScalarProperty Name="TabletTypeCode" ColumnName="TabletTypeCode" />
+                <ScalarProperty Name="Tax" ColumnName="Tax" />
+                <ScalarProperty Name="HSNCode" ColumnName="HSNCode" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="NoOfQty" ColumnName="NoOfQty" />
+                <ScalarProperty Name="TotQty" ColumnName="TotQty" />
+                <ScalarProperty Name="UnitCode" ColumnName="UnitCode" />
+                <ScalarProperty Name="Packing" ColumnName="Packing" />
+                <ScalarProperty Name="QtyBox" ColumnName="QtyBox" />
+                <ScalarProperty Name="QtyCartoon" ColumnName="QtyCartoon" />
+                <ScalarProperty Name="MaxStock" ColumnName="MaxStock" />
+                <ScalarProperty Name="MinStock" ColumnName="MinStock" />
+                <ScalarProperty Name="OpeningStock" ColumnName="OpeningStock" />
+                <ScalarProperty Name="SortID" ColumnName="SortID" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Sflag" ColumnName="Sflag" />
+                <ScalarProperty Name="Sdate" ColumnName="Sdate" />
+                <ScalarProperty Name="LogID" ColumnName="LogID" />
+                <ScalarProperty Name="PcID" ColumnName="PcID" />
+                <ScalarProperty Name="Ever" ColumnName="Ever" />
+                <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+                <ScalarProperty Name="Contain" ColumnName="Contain" />
+                <ScalarProperty Name="Pharma" ColumnName="Pharma" />
+                <ScalarProperty Name="Wellness" ColumnName="Wellness" />
+                <ScalarProperty Name="Online" ColumnName="Online" />
+                <ScalarProperty Name="ScheduleCode" ColumnName="ScheduleCode" />
+                <ScalarProperty Name="DPCO" ColumnName="DPCO" />
+                <ScalarProperty Name="ProductDate" ColumnName="ProductDate" />
+                <ScalarProperty Name="FrontImage" ColumnName="FrontImage" />
+                <ScalarProperty Name="BackImage" ColumnName="BackImage" />
+                <ScalarProperty Name="RightImage" ColumnName="RightImage" />
+                <ScalarProperty Name="LeftImage" ColumnName="LeftImage" />
+                <ScalarProperty Name="DescImage" ColumnName="DescImage" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -1,0 +1,44 @@
+﻿select * from LogInInfo
+select * from CounterMst
+
+select * from BranchTypeMst
+select * from BranchMst
+
+
+SELECT BranchName, TaxType, Pharma, Wellness, Online, Other, Address, ShopAddress, Mob1, GstNo, LanType 
+FROM BranchMst WHERE (BranchCode = " + BranchCode + ") 
+
+select * from CounterDet
+
+select * from MainMenuMst 
+select * from MainGroupMst
+
+select Distinct M.MainMenuMstID,M.MainMenuName,G.MainGroupMstID,G.MainGroupName from CounterDet as C
+join MainMenuMst as M on M.MainMenuMstID = C.MainMenuMstID
+join MainGroupMst as G on G.MainMenuMstID = M.MainMenuMstID
+where C.CrId=2
+
+
+
+select * from ProductMst
+select * from GenericGroupMst 
+select * from GenericMst  
+select * from StorageMst
+select * from TabletTypeMst
+select * from SubProductMst
+select * from DiseaseMst
+select * from MktCompanyMst
+select * from MfgCompanyMst    
+select * from UnitMst 
+
+select P.* from ProductMst as P
+inner join MfgCompanyMst as MF on P.MfgCompanyCode = MF.MfgCompanyCode
+inner join MktCompanyMst as MK on P.MktCompanyCode = MK.MktCompanyCode
+inner join DiseaseMst as D on P.DiseaseCode = D.DiseaseCode
+inner join SubProductMst as S on P.SubProductCode = S.SubProductCode
+inner join TabletTypeMst as T on P.TabletTypeCode = T.TabletTypeCode
+inner join StorageMst as ST on P.StorageCode = ST.StorageCode
+inner join UnitMst as U on P.UnitCode = U.UnitCode
+inner join GenericMst as G on P.GenericCode = G.GenericCode
+inner join GenericGroupMst as GG on G.GenericGroupCode = GG.GenericGroupCode
+Where P.Active=1

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9ba61ec56f594d64ac87b8fa191ac2ff" Name="Diagram1" ZoomLevel="78">
+        <EntityTypeShape EntityType="MED_GENMEDModel.AdMst" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.AreaMst" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.BatchMst" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.BranchCategoryMst" Width="1.5" PointX="7.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.BranchMst" Width="1.5" PointX="11.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.BranchTypeMst" Width="1.5" PointX="2.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.CityMst" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.ContainMst" Width="1.5" PointX="16.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.CounterDet" Width="1.5" PointX="16.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.CounterMst" Width="1.5" PointX="16.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.CounterReportDet" Width="1.5" PointX="16.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.DiseaseMst" Width="1.5" PointX="16.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.ErrorLogMaster" Width="1.5" PointX="18.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.GenericGroupMst" Width="1.5" PointX="18.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.GenericMst" Width="1.5" PointX="18.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.GodownMst" Width="1.5" PointX="18.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.ImgUploadMst" Width="1.5" PointX="18.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.LanguageMessage" Width="1.5" PointX="20.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.LogInInfo" Width="1.5" PointX="20.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.MainGroupMst" Width="1.5" PointX="20.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.MainMenuMst" Width="1.5" PointX="20.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.MainProductMst" Width="1.5" PointX="20.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.MarginMst" Width="1.5" PointX="20.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.Med_FinYearMst" Width="1.5" PointX="22.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.Med_GOrderConfirmMst" Width="1.5" PointX="0.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.Med_OfferMst" Width="1.5" PointX="2.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.Med_PurchaseOrderDet" Width="1.5" PointX="22.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.Med_PurchaseOrderDet_1" Width="1.5" PointX="4.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.Med_PurchaseOrderMst" Width="1.5" PointX="5" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.Med_PurchaseReturnDet" Width="1.5" PointX="3" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.Med_PurchaseReturnDet_1" Width="1.5" PointX="6.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.Med_PurchaseReturnMst" Width="1.5" PointX="14" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.Med_QuaterMst" Width="1.5" PointX="22.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.MenuMst" Width="1.5" PointX="8.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.MfgCompanyMst" Width="1.5" PointX="10.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.MktCompanyMst" Width="1.5" PointX="22.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.MSpeer_lsns" Width="1.5" PointX="22.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.POSDet" Width="1.5" PointX="16.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.POSMst" Width="1.5" PointX="22.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.POSRetDet" Width="1.5" PointX="24.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.RackMst" Width="1.5" PointX="12.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.ReportMst" Width="1.5" PointX="24.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.ReportTypeMst" Width="1.5" PointX="24.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.StateMst" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.Stock_Medical" Width="1.5" PointX="24.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.Stockist_SaleInvoiceDet" Width="1.5" PointX="6" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.Stockist_SaleInvoiceDet_1" Width="1.5" PointX="26.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.Stockist_SaleInvoiceMst" Width="1.5" PointX="14" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.Stockist_SaleReturnDet" Width="1.5" PointX="9" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.Stockist_SaleReturnDet_1" Width="1.5" PointX="26.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.Stockist_SaleReturnMst" Width="1.5" PointX="14" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.StorageMst" Width="1.5" PointX="4.75" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.SubProductMst" Width="1.5" PointX="26.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.TableMst" Width="1.5" PointX="26.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.TabletTypeMst" Width="1.5" PointX="26.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.TalukaMst" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.TaxMst" Width="1.5" PointX="0.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.TestMst" Width="1.5" PointX="26.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.UnitMst" Width="1.5" PointX="0.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.Med_ExpenseMst" Width="1.5" PointX="26.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.Med_ExpGroupMst" Width="1.5" PointX="0.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.Med_ExpMst" Width="1.5" PointX="6.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.MedPaymentMst" Width="1.5" PointX="8.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.MSpeer_originatorid_history" Width="1.5" PointX="18.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.TmpGiftReportMst" Width="1.5" PointX="28.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="MED_GENMEDModel.FK_Med_PurchaseReturnMst_BranchMst" ManuallyRouted="false" />
+        <AssociationConnector Association="MED_GENMEDModel.FK_Stockist_SaleInvoiceMst_BranchMst" ManuallyRouted="false" />
+        <AssociationConnector Association="MED_GENMEDModel.FK_Stockist_SaleReturnMst_BranchMst" ManuallyRouted="false" />
+        <AssociationConnector Association="MED_GENMEDModel.FK_Med_PurchaseOrderMst_BranchTypeMst" ManuallyRouted="false" />
+        <AssociationConnector Association="MED_GENMEDModel.FK_CityMst_StateMst" ManuallyRouted="false" />
+        <AssociationConnector Association="MED_GENMEDModel.FK_TalukaMst_CityMst" ManuallyRouted="false" />
+        <AssociationConnector Association="MED_GENMEDModel.FK_Med_PurchaseReturnDetID_Med_PurchaseReturnDetID" ManuallyRouted="false" />
+        <AssociationConnector Association="MED_GENMEDModel.FK_Med_PurchaseReturnDetID_TaxMst" ManuallyRouted="false" />
+        <AssociationConnector Association="MED_GENMEDModel.FK_Med_PurchaseReturnDetID_UnitMst" ManuallyRouted="false" />
+        <AssociationConnector Association="MED_GENMEDModel.FK_Stockist_SaleInvoiceDetID_Stockist_SaleInvoiceDetID" ManuallyRouted="false" />
+        <AssociationConnector Association="MED_GENMEDModel.FK_Stockist_SaleInvoiceDetID_TaxMst" ManuallyRouted="false" />
+        <AssociationConnector Association="MED_GENMEDModel.FK_Stockist_SaleInvoiceDetID_UnitMst" ManuallyRouted="false" />
+        <AssociationConnector Association="MED_GENMEDModel.FK_Stockist_SaleReturnDetID_Stockist_SaleReturnDetID" ManuallyRouted="false" />
+        <AssociationConnector Association="MED_GENMEDModel.FK_Stockist_SaleReturnDetID_TaxMst" ManuallyRouted="false" />
+        <AssociationConnector Association="MED_GENMEDModel.FK_Stockist_SaleReturnDetID_UnitMst" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.ProductMst" Width="1.5" PointX="11.375" PointY="28.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

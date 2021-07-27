@@ -25,7 +25,7 @@ namespace ProductWebAPI_Repository.Service
             context = new MED_GENMEDEntities();
         }
 
-        public List<ProductModel> ProductListCompanyWise(int UserId)
+        public List<ProductModel> ProductListCompanyWise()
         {
             try
             { 
@@ -41,7 +41,7 @@ namespace ProductWebAPI_Repository.Service
 "inner join UnitMst as U on P.UnitCode = U.UnitCode " +
 "inner join GenericMst as G on P.GenericCode = G.GenericCode " +
 "inner join GenericGroupMst as GG on G.GenericGroupCode = GG.GenericGroupCode " +
-"Where P.Active = 1 and P.LogID = " + UserId).ToList();
+"Where P.Active = 1").ToList();
                 return prod;
             }
             catch (Exception ex)

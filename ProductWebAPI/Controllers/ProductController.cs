@@ -66,12 +66,8 @@ namespace ProductWebAPI.Controllers
             List<ProductModel> productList = new List<ProductModel>();
             JilResponse<ProductModel> Response = new JilResponse<ProductModel>();
             try
-            {
-                var identity = (ClaimsIdentity)User.Identity;
-                var UserId = identity.Claims.Where(c => c.Type == "CrId").Select(c => c.Value).FirstOrDefault();
-                int CrId = Convert.ToInt32(UserId);
-                int LogId = _IUser_Repository.GetAllLogInfo().Where(x => x.UserID == CrId).OrderByDescending(x => x.LogID).FirstOrDefault().LogID;
-                productList = _IProduct_Repository.ProductListCompanyWise(LogId);
+            { 
+                productList = _IProduct_Repository.ProductListCompanyWise();
                 message = "Product Record Fetched!";
                 status = true;
             }

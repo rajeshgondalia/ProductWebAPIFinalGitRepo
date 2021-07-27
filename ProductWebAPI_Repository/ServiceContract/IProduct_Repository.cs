@@ -10,6 +10,6 @@ namespace ProductWebAPI_Repository.ServiceContract
 {
     public interface IProduct_Repository : IDisposable
     {
-        List<ProductModel> ProductListCompanyWise(int UserId);
+        List<ProductModel> ProductListCompanyWise();
     }
 }

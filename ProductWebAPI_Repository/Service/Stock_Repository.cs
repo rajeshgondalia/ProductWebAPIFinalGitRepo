@@ -24,7 +24,38 @@ namespace ProductWebAPI_Repository.Service
         {
             context = new MED_GENMEDEntities();
         }
-
+        public StockModel GetStockGenmed(int productCode)
+        {
+            return context.Database.SqlQuery<StockModel>("SELECT (SUM(ISNULL(dbo.Stock_Genmed.QtyInStrip, 0)) + " +
+                                                                       "SUM(ISNULL(dbo.Stock_Genmed.FreeQtyInStrip, 0)) + " +
+                                                                       "SUM(ISNULL(dbo.Stock_Genmed.SalRetQtyInStrip, 0))) - " +
+                                                                       "(SUM(ISNULL(dbo.Stock_Genmed.SalQtyInStrip, 0)) + " +
+                                                                       "SUM(ISNULL(dbo.Stock_Genmed.PurRetQtyInStrip, 0))) AS PendQTY," +
+                                                                       "dbo.ProductMst.ProductName," +
+                                                                       "dbo.MktCompanyMst.MktCompanyName" +
+                                                               "FROM dbo.Stock_Genmed " +
+                                                               "INNER JOIN dbo.ProductMst ON dbo.Stock_Genmed.ProductCode = dbo.ProductMst.ProductCode" +
+                                                               "INNER JOIN dbo.MktCompanyMst ON dbo.ProductMst.MktCompanyCode = dbo.MktCompanyMst.MktCompanyCode" +
+                                                               "WHERE (dbo.Stock_Genmed.ProductCode = " + productCode + ")" +
+                                                               "GROUP BY dbo.ProductMst.ProductName, dbo.MktCompanyMst.MktCompanyName" +
+                                                               "HAVING ((SUM(ISNULL(dbo.Stock_Genmed.QtyInStrip, 0)) + SUM(ISNULL(dbo.Stock_Genmed.FreeQtyInStrip, 0)) + SUM(ISNULL(dbo.Stock_Genmed.SalRetQtyInStrip, 0))) - (SUM(ISNULL(dbo.Stock_Genmed.SalQtyInStrip, 0)) + SUM(ISNULL(dbo.Stock_Genmed.PurRetQtyInStrip, 0))) > 0)").FirstOrDefault();
+        }
+        public StockModel GetStockStockist(int productCode)
+        {
+            return context.Database.SqlQuery<StockModel>("SELECT (SUM(ISNULL(dbo.Stock_Stockist.QtyInStrip, 0)) + " +
+                                                                                 "SUM(ISNULL(dbo.Stock_Stockist.FreeQtyInStrip, 0)) + " +
+                                                                                 "SUM(ISNULL(dbo.Stock_Stockist.SalRetQtyInStrip, 0))) - " +
+                                                                                 "(SUM(ISNULL(dbo.Stock_Stockist.SalQtyInStrip, 0)) + " +
+                                                                                 "SUM(ISNULL(dbo.Stock_Stockist.PurRetQtyInStrip, 0))) AS PendQTY," +
+                                                                                 "dbo.ProductMst.ProductName," +
+                                                                                 "dbo.MktCompanyMst.MktCompanyName" +
+                                                                         "FROM dbo.Stock_Stockist " +
+                                                                         "INNER JOIN dbo.ProductMst ON dbo.Stock_Stockist.ProductCode = dbo.ProductMst.ProductCode" +
+                                                                         "INNER JOIN dbo.MktCompanyMst ON dbo.ProductMst.MktCompanyCode = dbo.MktCompanyMst.MktCompanyCode" +
+                                                                         "WHERE (dbo.Stock_Stockist.ProductCode = " + productCode + ")" +
+                                                                         "GROUP BY dbo.ProductMst.ProductName, dbo.MktCompanyMst.MktCompanyName" +
+                                                                         "HAVING ((SUM(ISNULL(dbo.Stock_Stockist.QtyInStrip, 0)) + SUM(ISNULL(dbo.Stock_Stockist.FreeQtyInStrip, 0)) + SUM(ISNULL(dbo.Stock_Stockist.SalRetQtyInStrip, 0))) - (SUM(ISNULL(dbo.Stock_Stockist.SalQtyInStrip, 0)) + SUM(ISNULL(dbo.Stock_Stockist.PurRetQtyInStrip, 0))) > 0)").FirstOrDefault();
+        }
         #region IDisposable Support
         private bool disposedValue = false; // To detect redundant calls
 

@@ -105,6 +105,9 @@
     <Compile Include="Data\GenericMst.cs">
       <DependentUpon>ProductEDMX.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\GetAllProductsAPI_Result.cs">
+      <DependentUpon>ProductEDMX.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\GodownMst.cs">
       <DependentUpon>ProductEDMX.tt</DependentUpon>
     </Compile>
@@ -243,7 +246,13 @@
     <Compile Include="Data\Stockist_SaleReturnMst.cs">
       <DependentUpon>ProductEDMX.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\Stock_Genmed.cs">
+      <DependentUpon>ProductEDMX.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\Stock_Medical.cs">
+      <DependentUpon>ProductEDMX.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Stock_Stockist.cs">
       <DependentUpon>ProductEDMX.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\StorageMst.cs">

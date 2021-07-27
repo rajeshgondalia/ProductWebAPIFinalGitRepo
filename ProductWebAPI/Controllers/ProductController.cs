@@ -60,31 +60,19 @@ namespace ProductWebAPI.Controllers
         /// <param name="type">User</param>
         /// <returns></returns>
         [HttpGet] 
-        public HttpResponseMessage GetProducts(string type)
+        public HttpResponseMessage GetProducts()
         { 
             string returnData = "";
             List<ProductModel> productList = new List<ProductModel>();
             JilResponse<ProductModel> Response = new JilResponse<ProductModel>();
             try
             {
-                if (type == "Admin")
-                {
-                    productList = _IProduct_Repository.ProductListCompanyWise().ToList();
-                    message = "Product Record Fetched!";
-                }
-                else if (type == "User")
-                {
-                    var identity = (ClaimsIdentity)User.Identity;
-                    var UserId = identity.Claims.Where(c => c.Type == "CrId").Select(c => c.Value).FirstOrDefault();
-                    int CrId = Convert.ToInt32(UserId);
-                    int LogId = _IUser_Repository.GetAllLogInfo().Where(x => x.UserID == CrId).OrderByDescending(x => x.LogID).FirstOrDefault().LogID;
-                    productList = _IProduct_Repository.ProductListCompanyWise().Where(x => x.LogID == LogId).ToList();
-                    message = "Product Record Fetched!";
-                }
-                else
-                {
-                    message = "Invalid Type!";
-                }
+                var identity = (ClaimsIdentity)User.Identity;
+                var UserId = identity.Claims.Where(c => c.Type == "CrId").Select(c => c.Value).FirstOrDefault();
+                int CrId = Convert.ToInt32(UserId);
+                int LogId = _IUser_Repository.GetAllLogInfo().Where(x => x.UserID == CrId).OrderByDescending(x => x.LogID).FirstOrDefault().LogID;
+                productList = _IProduct_Repository.ProductListCompanyWise(LogId);
+                message = "Product Record Fetched!";
                 status = true;
             }
             catch (Exception ex)

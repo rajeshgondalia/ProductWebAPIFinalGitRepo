@@ -51,5 +51,9 @@ namespace ProductWebAPI_Repository.DTO
         public string RightImage { get; set; }
         public string LeftImage { get; set; }
         public string DescImage { get; set; }
+
+        public string Sdate1 { get; set; }
+
+        public string ProductDate1 { get; set; }
     }
 }

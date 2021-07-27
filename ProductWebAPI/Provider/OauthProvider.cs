@@ -30,20 +30,24 @@ namespace ProductWebAPI.Provider
             var user = _IUser_Repository.UserLogin(context.UserName, context.Password);
             if (user != null)
             {
-                identity.AddClaim(new Claim("LoginName", user.LogInName));
-                identity.AddClaim(new Claim("CrName", user.CrName));
-                identity.AddClaim(new Claim("CounterMstID", user.CounterMstID.ToString()));
-                identity.AddClaim(new Claim("CrId", user.CrId.ToString()));
-                identity.AddClaim(new Claim("LogID", user.LogID.ToString()));
-                identity.AddClaim(new Claim("LoggedOn", DateTime.Now.ToString()));
-                await Task.Run(() => context.Validated(identity));
+                bool isAlreadyLogged = _IUser_Repository.CheckUserAvailableInLoginInfo(user.CrId);
+                if (isAlreadyLogged)
+                    context.SetError("Already Logged", "User is already logged in another device");
+                else
+                {
+                    identity.AddClaim(new Claim("LoginName", user.LogInName));
+                    identity.AddClaim(new Claim("CrName", user.CrName));
+                    identity.AddClaim(new Claim("CounterMstID", user.CounterMstID.ToString()));
+                    identity.AddClaim(new Claim("CrId", user.CrId.ToString()));
+                    identity.AddClaim(new Claim("LogID", user.LogID.ToString()));
+                    identity.AddClaim(new Claim("LoggedOn", DateTime.Now.ToString()));
+                    await Task.Run(() => context.Validated(identity));
+                }                
             }
             else
             {
                 context.SetError("Wrong Crendtials", "Provided username and password is incorrect");
             }
-        }
-
-         
+        }         
     }
 }

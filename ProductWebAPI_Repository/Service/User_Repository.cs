@@ -111,6 +111,10 @@ namespace ProductWebAPI_Repository.Service
                 throw;
             }
         }
+        public bool CheckUserAvailableInLoginInfo(int UserId)
+        {
+            return context.LogInInfoes.Any(x => x.UserID == UserId);
+        }
 
         #region IDisposable Support
         private bool disposedValue = false; // To detect redundant calls
@@ -131,7 +135,7 @@ namespace ProductWebAPI_Repository.Service
         {
             Dispose(true);
             GC.SuppressFinalize(this);
-        }
+        }       
         #endregion
     }
 }

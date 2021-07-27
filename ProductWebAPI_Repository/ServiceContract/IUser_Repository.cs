@@ -14,5 +14,6 @@ namespace ProductWebAPI_Repository.ServiceContract
         CounterMst UserLogin(string Username, string Password);
         UserBranchModel GetUserBranchDetailsById(int CrId); 
         IQueryable<LogInInfo> GetAllLogInfo();
+        bool CheckUserAvailableInLoginInfo(int UserId);
     }
 }

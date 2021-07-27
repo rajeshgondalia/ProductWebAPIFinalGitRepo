@@ -25,68 +25,23 @@ namespace ProductWebAPI_Repository.Service
             context = new MED_GENMEDEntities();
         }
 
-        public IQueryable<ProductModel> ProductListCompanyWise()
+        public List<ProductModel> ProductListCompanyWise(int UserId)
         {
             try
             { 
-                var prod = (from P in context.ProductMsts.AsNoTracking().Where(x => x.Active == true)
-                        join MF in context.MfgCompanyMsts on P.MfgCompanyCode equals MF.MfgCompanyCode
-                        join MK in context.MktCompanyMsts on P.MktCompanyCode equals MK.MktCompanyCode
-                        join D in context.DiseaseMsts on P.DiseaseCode equals D.DiseaseCode
-                        join S in context.SubProductMsts on P.SubProductCode equals S.SubProductCode
-                        join T in context.TabletTypeMsts on P.TabletTypeCode equals T.TabletTypeCode
-                        join ST in context.StorageMsts on P.StorageCode equals ST.StorageCode
-                        join U in context.UnitMsts on P.UnitCode equals U.UnitCode
-                        join G in context.GenericMsts on P.GenericCode equals G.GenericCode
-                        join GG in context.GenericGroupMsts on G.GenericGroupCode equals GG.GenericGroupCode
-                        select new ProductModel
-                        {
-                            ProductMstID = P.ProductMstID,
-                            ProductCode = P.ProductCode,
-                            ProductName = P.ProductName,
-                            SubProductCode = P.SubProductCode,
-                            GenericCode = P.GenericCode,
-                            MfgCompanyCode = P.MfgCompanyCode,
-                            MktCompanyCode = P.MktCompanyCode,
-                            MfgCompanyCode1 = P.MfgCompanyCode1,
-                            DiseaseCode = P.DiseaseCode,
-                            StorageCode = P.StorageCode,
-                            TabletTypeCode = P.TabletTypeCode,
-                            Tax = P.Tax,
-                            HSNCode = P.HSNCode,
-                            Qty = P.Qty,
-                            NoOfQty = P.NoOfQty,
-                            TotQty = P.TotQty,
-                            UnitCode = P.UnitCode,
-                            Packing = P.Packing,
-                            QtyBox = P.QtyBox,
-                            QtyCartoon = P.QtyCartoon,
-                            MaxStock = P.MaxStock,
-                            MinStock = P.MinStock,
-                            OpeningStock = P.OpeningStock,
-                            SortID = P.SortID,
-                            Active = P.Active,
-                            Sflag = P.Sflag,
-                            //Sdate = DateTime.ParseExact(Convert.ToString(P.Sdate), "dd/MM/yyyy", null),
-                            Sdate = P.Sdate,
-                            LogID = P.LogID,
-                            PcID = P.PcID,
-                            Ever = P.Ever,
-                            CompanyCode = P.CompanyCode,
-                            Contain = P.Contain,
-                            Pharma = P.Pharma,
-                            Wellness = P.Wellness,
-                            Online = P.Online,
-                            ScheduleCode = P.ScheduleCode,
-                            DPCO = P.DPCO,
-                            //ProductDate = DateTime.ParseExact(Convert.ToString(P.ProductDate), "dd/MM/yyyy", null), 
-                            ProductDate = P.ProductDate,
-                            FrontImage = P.FrontImage,
-                            BackImage = P.BackImage,
-                            RightImage = P.RightImage,
-                            LeftImage = P.LeftImage,
-                            DescImage = P.DescImage
-                        }).AsQueryable();
+                var prod = context.Database.SqlQuery<ProductModel>("select P.*, (select CONVERT(VARCHAR(10), P.Sdate, 103)) as Sdate1, " +
+  "(select CONVERT(VARCHAR(10), P.ProductDate, 103)) as ProductDate1 " +
+  "from ProductMst as P " +
+"inner join MfgCompanyMst as MF on P.MfgCompanyCode = MF.MfgCompanyCode " +
+"inner join MktCompanyMst as MK on P.MktCompanyCode = MK.MktCompanyCode " +
+"inner join DiseaseMst as D on P.DiseaseCode = D.DiseaseCode " +
+"inner join SubProductMst as S on P.SubProductCode = S.SubProductCode " +
+"inner join TabletTypeMst as T on P.TabletTypeCode = T.TabletTypeCode " +
+"inner join StorageMst as ST on P.StorageCode = ST.StorageCode " +
+"inner join UnitMst as U on P.UnitCode = U.UnitCode " +
+"inner join GenericMst as G on P.GenericCode = G.GenericCode " +
+"inner join GenericGroupMst as GG on G.GenericGroupCode = GG.GenericGroupCode " +
+"Where P.Active = 1 and P.LogID = " + UserId).ToList();
                 return prod;
             }
             catch (Exception ex)

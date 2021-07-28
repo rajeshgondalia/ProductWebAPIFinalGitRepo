@@ -30,9 +30,7 @@ namespace ProductWebAPI_Repository.Service
         {
             try
             {
-                List<MainMenuModel> MainMenuList = new List<MainMenuModel>();
-                List<SubMenuModel> GroupList = new List<SubMenuModel>();
-                List<Menu> MenuList = new List<Menu>();
+                List<MainMenuModel> MainMenuList = new List<MainMenuModel>();  
                 var menudata = (from C in context.CounterDets.Where(x => x.CrId == CrId)
                                 join M in context.MainMenuMsts.Where(x => x.Valid == 1) on C.MainMenuMstID equals M.MainMenuMstID
                                 select new MainMenuModel
@@ -62,12 +60,14 @@ namespace ProductWebAPI_Repository.Service
                     if (checkExists == null)
                     {
                         mData.MainMenuMstID = M.MainMenuMstID;
-                        mData.MainMenuName = M.MainMenuName; 
+                        mData.MainMenuName = M.MainMenuName;
+                        List<SubMenuModel> GroupList = new List<SubMenuModel>();
                         foreach (var G in M.Groups)
                         {
                             SubMenuModel sData = new SubMenuModel();
                             sData.MainGroupMstID = G.MainGroupMstID;
-                            sData.MainGroupName = G.MainGroupName; 
+                            sData.MainGroupName = G.MainGroupName;
+                            List<Menu> MenuList = new List<Menu>();
                             foreach (var I in G.SubMenu)
                             {
                                 Menu iData = new Menu();

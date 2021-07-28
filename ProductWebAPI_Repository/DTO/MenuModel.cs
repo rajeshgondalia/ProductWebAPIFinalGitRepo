@@ -25,6 +25,7 @@ namespace ProductWebAPI_Repository.DTO
     {
         public byte MenuMstID { get; set; }
         public string MenuName { get; set; }
-        public byte[] MenuImage { get; set; }
+        public byte[] MenuImageByte { get; set; }
+        public string MenuImageBase64 { get; set; }
     }
 }

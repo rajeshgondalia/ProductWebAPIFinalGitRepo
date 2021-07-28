@@ -31,6 +31,8 @@ namespace ProductWebAPI_Repository.Service
             try
             {
                 List<MainMenuModel> MainMenuList = new List<MainMenuModel>();
+                List<SubMenuModel> GroupList = new List<SubMenuModel>();
+                List<Menu> MenuList = new List<Menu>();
                 var menudata = (from C in context.CounterDets.Where(x => x.CrId == CrId)
                                 join M in context.MainMenuMsts.Where(x => x.Valid == 1) on C.MainMenuMstID equals M.MainMenuMstID
                                 select new MainMenuModel
@@ -48,10 +50,10 @@ namespace ProductWebAPI_Repository.Service
                                                                                         {
                                                                                             MenuMstID = c.MenuMstID,
                                                                                             MenuName = c.MenuName,
-                                                                                            MenuImage = c.MenuImage
+                                                                                            MenuImageByte = c.MenuImage 
                                                                                         }).ToList()
                                               }).ToList()
-                                }).AsQueryable();
+                                }).ToList();
 
                 foreach (var M in menudata)
                 {
@@ -60,8 +62,25 @@ namespace ProductWebAPI_Repository.Service
                     if (checkExists == null)
                     {
                         mData.MainMenuMstID = M.MainMenuMstID;
-                        mData.MainMenuName = M.MainMenuName;
-                        mData.Groups = M.Groups;
+                        mData.MainMenuName = M.MainMenuName; 
+                        foreach (var G in M.Groups)
+                        {
+                            SubMenuModel sData = new SubMenuModel();
+                            sData.MainGroupMstID = G.MainGroupMstID;
+                            sData.MainGroupName = G.MainGroupName; 
+                            foreach (var I in G.SubMenu)
+                            {
+                                Menu iData = new Menu();
+                                iData.MenuMstID = I.MenuMstID;
+                                iData.MenuName = I.MenuName;
+                                iData.MenuImageByte = null;
+                                iData.MenuImageBase64 = I.MenuImageByte == null ? string.Empty : "data:image/png;base64," + Convert.ToBase64String(I.MenuImageByte);
+                                MenuList.Add(iData); 
+                            }
+                            sData.SubMenu = MenuList;
+                            GroupList.Add(sData); 
+                        }
+                        mData.Groups = GroupList;
                         MainMenuList.Add(mData);
                     }
                 }

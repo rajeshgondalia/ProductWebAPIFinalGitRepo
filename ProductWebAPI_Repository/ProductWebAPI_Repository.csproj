@@ -285,6 +285,8 @@
     <Compile Include="DTO\ContainModel.cs" />
     <Compile Include="DTO\DiseaseModel.cs" />
     <Compile Include="DTO\MenuModel.cs" />
+    <Compile Include="DTO\PagingParameterModel.cs" />
+    <Compile Include="DTO\ProductFilterModel.cs" />
     <Compile Include="DTO\ProductModel.cs" />
     <Compile Include="DTO\StockModel.cs" />
     <Compile Include="DTO\UserBranchModel.cs" />

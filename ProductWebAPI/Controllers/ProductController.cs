@@ -59,15 +59,15 @@ namespace ProductWebAPI.Controllers
         /// <param name="type">Admin</param>
         /// <param name="type">User</param>
         /// <returns></returns>
-        [HttpGet] 
-        public HttpResponseMessage GetProducts()
+        [HttpPost] 
+        public HttpResponseMessage GetProducts(ProductFilterModel filter)
         { 
             string returnData = "";
             List<ProductModel> productList = new List<ProductModel>();
             JilResponse<ProductModel> Response = new JilResponse<ProductModel>();
             try
             { 
-                productList = _IProduct_Repository.ProductListCompanyWise();
+                productList = _IProduct_Repository.ProductListCompanyWise(filter);
                 message = "Product Record Fetched!";
                 status = true;
             }

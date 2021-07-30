@@ -25,7 +25,7 @@ namespace ProductWebAPI_Repository.Service
             context = new MED_GENMEDEntities();
         }
 
-        public List<ProductModel> ProductListCompanyWise()
+        public List<ProductModel> ProductListCompanyWise(ProductFilterModel filter)
         {
             try
             { 

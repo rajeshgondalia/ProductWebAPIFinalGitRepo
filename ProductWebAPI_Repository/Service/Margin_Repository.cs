@@ -25,6 +25,75 @@ namespace ProductWebAPI_Repository.Service
         {
             context = new MED_GENMEDEntities();
         }
+
+        public List<MarginModel> GetAllMargin(MarginFilter filter)
+        {
+            try
+            {
+                IQueryable<MarginModel> margin = new MarginModel[] { }.AsQueryable();
+                if (filter.SubTypeCode == 1 && filter.BranchTypeCode == 1)
+                {
+                    margin = context.Database.SqlQuery<MarginModel>("SELECT * FROM dbo.MarginMst").AsQueryable();
+                    if (filter.ProductCode > 0)
+                        margin = margin.Where(x => x.ProductCode == filter.ProductCode).AsQueryable();
+                    if (!string.IsNullOrEmpty(filter.BatchNo))
+                        margin = margin.Where(x => x.BatchNo == filter.BatchNo).AsQueryable();
+                    if (!string.IsNullOrEmpty(filter.Expiry))
+                        margin = margin.Where(x => x.Expiry == filter.Expiry).AsQueryable();
+
+                    // Get's No of Rows Count   
+                    int count = margin.Count();
+                    // Parameter is passed from Query string if it is null then it default Value will be pageNumber:1  
+                    int CurrentPage = filter.pageNumber;
+                    // Parameter is passed from Query string if it is null then it default Value will be pageSize:20  
+                    int PageSize = filter.pageSize;
+                    // Display TotalCount to Records to User  
+                    int TotalCount = count;
+                    // Calculating Totalpage by Dividing (No of Records / Pagesize)  
+                    int TotalPages = (int)Math.Ceiling(count / (double)PageSize);
+                    // Returns List of Customer after applying Paging   
+                    var items = margin.Skip((CurrentPage - 1) * PageSize).Take(PageSize).ToList();
+                    return items;
+                }
+
+                if (filter.SubTypeCode == 2 && filter.BranchTypeCode == 2)
+                {
+
+                }
+
+                if (filter.SubTypeCode == 2 && filter.BranchTypeCode == 4)
+                {
+
+                }
+
+                if (filter.SubTypeCode == 2 && filter.BranchTypeCode == 6)
+                {
+
+                }
+
+                if (filter.SubTypeCode == 3 && filter.BranchTypeCode == 3)
+                {
+
+                }
+
+                if (filter.SubTypeCode == 3 && filter.BranchTypeCode == 5)
+                {
+
+                }
+
+                if (filter.SubTypeCode == 3 && filter.BranchTypeCode == 7)
+                {
+
+                }
+                return margin.ToList();
+            }
+            catch (Exception ex)
+            {
+                ex.SetLog("GetAllMargin,Repository");
+                throw;
+            }
+        }
+
         #region IDisposable Support
         private bool disposedValue = false; // To detect redundant calls
 

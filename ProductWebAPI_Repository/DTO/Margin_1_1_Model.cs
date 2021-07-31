@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProductWebAPI_Repository.DTO
 {
-    class Margin_1_1_Model
+    public class Margin_1_1_Model
     {
     }
 }

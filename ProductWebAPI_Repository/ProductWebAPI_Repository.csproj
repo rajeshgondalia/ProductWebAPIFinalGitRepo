@@ -284,6 +284,8 @@
     </Compile>
     <Compile Include="DTO\ContainModel.cs" />
     <Compile Include="DTO\DiseaseModel.cs" />
+    <Compile Include="DTO\MarginFilter.cs" />
+    <Compile Include="DTO\MarginModel.cs" />
     <Compile Include="DTO\Margin_1_1_Model.cs" />
     <Compile Include="DTO\Margin_2_2_Model.cs" />
     <Compile Include="DTO\Margin_2_4_Model.cs" />

@@ -284,6 +284,13 @@
     </Compile>
     <Compile Include="DTO\ContainModel.cs" />
     <Compile Include="DTO\DiseaseModel.cs" />
+    <Compile Include="DTO\Margin_1_1_Model.cs" />
+    <Compile Include="DTO\Margin_2_2_Model.cs" />
+    <Compile Include="DTO\Margin_2_4_Model.cs" />
+    <Compile Include="DTO\Margin_2_6_Model.cs" />
+    <Compile Include="DTO\Margin_3_3_Model.cs" />
+    <Compile Include="DTO\Margin_3_5_Model.cs" />
+    <Compile Include="DTO\Margin_3_7_Model.cs" />
     <Compile Include="DTO\MenuModel.cs" />
     <Compile Include="DTO\PagingParameterModel.cs" />
     <Compile Include="DTO\ProductFilterModel.cs" />
@@ -292,12 +299,14 @@
     <Compile Include="DTO\UserBranchModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceContract\IError_Repository.cs" />
+    <Compile Include="ServiceContract\IMargin_Repository.cs" />
     <Compile Include="ServiceContract\IMenu_Repository.cs" />
     <Compile Include="ServiceContract\IOther_Repository.cs" />
     <Compile Include="ServiceContract\IProduct_Repository.cs" />
     <Compile Include="ServiceContract\IStock_Repository.cs" />
     <Compile Include="ServiceContract\IUser_Repository.cs" />
     <Compile Include="Service\Error_Repository.cs" />
+    <Compile Include="Service\Margin_Repository.cs" />
     <Compile Include="Service\Menu_Repository.cs" />
     <Compile Include="Service\Other_Repository.cs" />
     <Compile Include="Service\Product_Repository.cs" />

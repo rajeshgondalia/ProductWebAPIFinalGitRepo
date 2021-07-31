@@ -545,6 +545,7 @@
     <Compile Include="Common\APIResponse.cs" />
     <Compile Include="Common\JilFormatter.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Controllers\MarginController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\StockController.cs" />

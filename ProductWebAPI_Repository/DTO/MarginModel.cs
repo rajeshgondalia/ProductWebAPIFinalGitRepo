@@ -51,4 +51,10 @@ namespace ProductWebAPI_Repository.DTO
         public Nullable<int> Ever { get; set; }
         public Nullable<int> CompanyCode { get; set; }
     }
+
+    public class MarginPagingModel
+    {
+        public List<MarginModel> MarginList { get; set; }
+        public PagingModel PagingDetails { get; set; }
+    }
 }

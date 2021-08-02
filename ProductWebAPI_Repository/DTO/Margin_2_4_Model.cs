@@ -26,4 +26,10 @@ namespace ProductWebAPI_Repository.DTO
         public Nullable<decimal> WSMarginPer { get; set; }
         public Nullable<decimal> MSPurRate { get; set; }
     }
+
+    public class Margin_2_4PagingModel
+    {
+        public List<Margin_2_4_Model> Margin_2_4_List { get; set; }
+        public PagingModel PagingDetails { get; set; }
+    }
 }

@@ -60,13 +60,7 @@ namespace ProductWebAPI_Repository.DTO
         public string UnitName { get; set; }
         public string ScheduleName { get; set; }
         public Nullable<bool> Alert { get; set; }
-    }
-
-    public class PagingModel
-    {
-        public int pageNumber { get; set; }
-        public int TotalCount { get; set; }
-    }
+    } 
 
     public class ProductPagingModel
     {

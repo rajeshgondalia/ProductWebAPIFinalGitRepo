@@ -308,6 +308,7 @@
     </Compile>
     <Compile Include="DTO\ContainModel.cs" />
     <Compile Include="DTO\DiseaseModel.cs" />
+    <Compile Include="DTO\GetAPIBill_2_FilterModel.cs" />
     <Compile Include="DTO\MarginFilter.cs" />
     <Compile Include="DTO\MarginModel.cs" />
     <Compile Include="DTO\Margin_1_1_Model.cs" />
@@ -318,7 +319,7 @@
     <Compile Include="DTO\Margin_3_5_Model.cs" />
     <Compile Include="DTO\Margin_3_7_Model.cs" />
     <Compile Include="DTO\MenuModel.cs" />
-    <Compile Include="DTO\PagingParameterModel.cs" />
+    <Compile Include="DTO\PagingModel.cs" />
     <Compile Include="DTO\ProductFilterModel.cs" />
     <Compile Include="DTO\ProductModel.cs" />
     <Compile Include="DTO\StockModel.cs" />

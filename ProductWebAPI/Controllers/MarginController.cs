@@ -38,20 +38,21 @@ namespace ProductWebAPI.Controllers
         [HttpPost]
         public HttpResponseMessage GetMargin(MarginFilter filter)
         {
+            JilResponse<MarginModel> blankResponse = new JilResponse<MarginModel>();
             string returnData = "";
             try
             {
                 if (filter.SubTypeCode == 1 && filter.BranchTypeCode == 1)
                 {
-                    JilResponse<MarginModel> marginResponse = new JilResponse<MarginModel>();
-                    List<MarginModel> marginList = new List<MarginModel>();
+                    JilResponse<MarginPagingModel> marginResponse = new JilResponse<MarginPagingModel>();
+                    MarginPagingModel marginList = new MarginPagingModel();
                     marginList = _IMargin_Repository.GetAllMargin(filter);
                     message = "Margin Record Fetched!";
                     status = true;
 
                     marginResponse.status = status;
                     marginResponse.Message = message;
-                    marginResponse.data = marginList;
+                    marginResponse.Result = marginList;
 
                     using (var output = new StringWriter())
                     {
@@ -64,15 +65,15 @@ namespace ProductWebAPI.Controllers
                 }
                 else if (filter.SubTypeCode == 2 && filter.BranchTypeCode == 2)
                 {
-                    JilResponse<Margin_2_2_Model> marginResponse24 = new JilResponse<Margin_2_2_Model>();
-                    List<Margin_2_2_Model> marginList = new List<Margin_2_2_Model>();
+                    JilResponse<Margin_2_2PagingModel> marginResponse24 = new JilResponse<Margin_2_2PagingModel>();
+                    Margin_2_2PagingModel marginList = new Margin_2_2PagingModel();
                     marginList = _IMargin_Repository.GetMargin_2_2(filter);
                     message = "Margin Record Fetched!";
                     status = true;
 
                     marginResponse24.status = status;
                     marginResponse24.Message = message;
-                    marginResponse24.data = marginList;
+                    marginResponse24.Result = marginList;
 
                     using (var output = new StringWriter())
                     {
@@ -87,15 +88,15 @@ namespace ProductWebAPI.Controllers
                 else if (filter.SubTypeCode == 2 && filter.BranchTypeCode == 4)
                 {
 
-                    JilResponse<Margin_2_4_Model> marginResponse24 = new JilResponse<Margin_2_4_Model>();
-                    List<Margin_2_4_Model> marginList = new List<Margin_2_4_Model>();
+                    JilResponse<Margin_2_4PagingModel> marginResponse24 = new JilResponse<Margin_2_4PagingModel>();
+                    Margin_2_4PagingModel marginList = new Margin_2_4PagingModel();
                     marginList = _IMargin_Repository.GetMargin_2_4(filter);
                     message = "Margin Record Fetched!";
                     status = true;
 
                     marginResponse24.status = status;
                     marginResponse24.Message = message;
-                    marginResponse24.data = marginList;
+                    marginResponse24.Result = marginList;
 
                     using (var output = new StringWriter())
                     {
@@ -108,15 +109,15 @@ namespace ProductWebAPI.Controllers
                 }
                 else if (filter.SubTypeCode == 2 && filter.BranchTypeCode == 6)
                 {
-                    JilResponse<Margin_2_6_Model> marginResponse24 = new JilResponse<Margin_2_6_Model>();
-                    List<Margin_2_6_Model> marginList = new List<Margin_2_6_Model>();
+                    JilResponse<Margin_2_6PagingModel> marginResponse24 = new JilResponse<Margin_2_6PagingModel>();
+                    Margin_2_6PagingModel marginList = new Margin_2_6PagingModel();
                     marginList = _IMargin_Repository.GetMargin_2_6(filter);
                     message = "Margin Record Fetched!";
                     status = true;
 
                     marginResponse24.status = status;
                     marginResponse24.Message = message;
-                    marginResponse24.data = marginList;
+                    marginResponse24.Result = marginList;
 
                     using (var output = new StringWriter())
                     {
@@ -129,15 +130,15 @@ namespace ProductWebAPI.Controllers
                 }
                 else if (filter.SubTypeCode == 3 && filter.BranchTypeCode == 3)
                 {
-                    JilResponse<Margin_3_3_Model> marginResponse24 = new JilResponse<Margin_3_3_Model>();
-                    List<Margin_3_3_Model> marginList = new List<Margin_3_3_Model>();
+                    JilResponse<Margin_3_3PagingModel> marginResponse24 = new JilResponse<Margin_3_3PagingModel>();
+                    Margin_3_3PagingModel marginList = new Margin_3_3PagingModel();
                     marginList = _IMargin_Repository.GetMargin_3_3(filter);
                     message = "Margin Record Fetched!";
                     status = true;
 
                     marginResponse24.status = status;
                     marginResponse24.Message = message;
-                    marginResponse24.data = marginList;
+                    marginResponse24.Result = marginList;
 
                     using (var output = new StringWriter())
                     {
@@ -150,15 +151,15 @@ namespace ProductWebAPI.Controllers
                 }
                 else if (filter.SubTypeCode == 3 && filter.BranchTypeCode == 5)
                 {
-                    JilResponse<Margin_3_5_Model> marginResponse24 = new JilResponse<Margin_3_5_Model>();
-                    List<Margin_3_5_Model> marginList = new List<Margin_3_5_Model>();
+                    JilResponse<Margin_3_5PagingModel> marginResponse24 = new JilResponse<Margin_3_5PagingModel>();
+                    Margin_3_5PagingModel marginList = new Margin_3_5PagingModel();
                     marginList = _IMargin_Repository.GetMargin_3_5(filter);
                     message = "Margin Record Fetched!";
                     status = true;
 
                     marginResponse24.status = status;
                     marginResponse24.Message = message;
-                    marginResponse24.data = marginList;
+                    marginResponse24.Result = marginList;
 
                     using (var output = new StringWriter())
                     {
@@ -171,15 +172,15 @@ namespace ProductWebAPI.Controllers
                 }
                 else if (filter.SubTypeCode == 3 && filter.BranchTypeCode == 7)
                 {
-                    JilResponse<Margin_3_7_Model> marginResponse24 = new JilResponse<Margin_3_7_Model>();
-                    List<Margin_3_7_Model> marginList = new List<Margin_3_7_Model>();
+                    JilResponse<Margin_3_7PagingModel> marginResponse24 = new JilResponse<Margin_3_7PagingModel>();
+                    Margin_3_7PagingModel marginList = new Margin_3_7PagingModel();
                     marginList = _IMargin_Repository.GetMargin_3_7(filter);
                     message = "Margin Record Fetched!";
                     status = true;
 
                     marginResponse24.status = status;
                     marginResponse24.Message = message;
-                    marginResponse24.data = marginList;
+                    marginResponse24.Result = marginList;
 
                     using (var output = new StringWriter())
                     {
@@ -189,7 +190,9 @@ namespace ProductWebAPI.Controllers
                     var response = Request.CreateResponse(HttpStatusCode.OK);
                     response.Content = new StringContent(returnData, Encoding.UTF8, "application/json");
                     return response;
-                }
+                } 
+                message = "Invalid Parameter!";
+                status = true; 
             }
             catch (Exception ex)
             {
@@ -197,15 +200,8 @@ namespace ProductWebAPI.Controllers
                 message = "Bad Request!" + " - " + ex.ToString();
                 this._IError_Repository.InsertErrorLog(ex.ToString(), "GetAllProducts", "Product/GetAllProducts");
             }
-            #region Get empty margin list
-            JilResponse<MarginModel> blankResponse = new JilResponse<MarginModel>();
-            List<MarginModel> EmptymarginList = new List<MarginModel>();
-            message = "Margin Record Fetched!";
-            status = true;
-
             blankResponse.status = status;
             blankResponse.Message = message;
-            blankResponse.data = EmptymarginList;
 
             using (var output = new StringWriter())
             {
@@ -215,7 +211,6 @@ namespace ProductWebAPI.Controllers
             var Emptyresponse = Request.CreateResponse(HttpStatusCode.OK);
             Emptyresponse.Content = new StringContent(returnData, Encoding.UTF8, "application/json");
             return Emptyresponse;
-            #endregion
         }
     }
 }

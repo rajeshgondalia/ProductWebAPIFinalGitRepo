@@ -26,10 +26,12 @@ namespace ProductWebAPI_Repository.Service
             context = new MED_GENMEDEntities();
         }
 
-        public List<MarginModel> GetAllMargin(MarginFilter filter)
+        public MarginPagingModel GetAllMargin(MarginFilter filter)
         {
             try
             {
+                MarginPagingModel mModel = new MarginPagingModel();
+                PagingModel pModel = new PagingModel();
                 IQueryable<MarginModel> margin = new MarginModel[] { }.AsQueryable();
                 margin = context.Database.SqlQuery<MarginModel>("SELECT * FROM dbo.MarginMst").AsQueryable();
                 if (filter.ProductCode > 0)
@@ -51,7 +53,12 @@ namespace ProductWebAPI_Repository.Service
                 int TotalPages = (int)Math.Ceiling(count / (double)PageSize);
                 // Returns List of Customer after applying Paging   
                 var items = margin.Skip((CurrentPage - 1) * PageSize).Take(PageSize).ToList();
-                return items;
+
+                mModel.MarginList = items;
+                pModel.pageNumber = CurrentPage;
+                pModel.TotalCount = TotalCount;
+                mModel.PagingDetails = pModel;
+                return mModel;
 
             }
             catch (Exception ex)
@@ -60,10 +67,12 @@ namespace ProductWebAPI_Repository.Service
                 throw;
             }
         }
-        public List<Margin_2_2_Model> GetMargin_2_2(MarginFilter filter)
+        public Margin_2_2PagingModel GetMargin_2_2(MarginFilter filter)
         {
             try
             {
+                Margin_2_2PagingModel mModel = new Margin_2_2PagingModel();
+                PagingModel pModel = new PagingModel();
                 IQueryable<Margin_2_2_Model> margin = new Margin_2_2_Model[] { }.AsQueryable();
                 margin = context.Database.SqlQuery<Margin_2_2_Model>("SELECT MarginMstID, P.ProductCode, P.ProductName, MKT.MktCompanyName, BatchNo, Expiry, MRP, SalRate, PurRate, GSTPer, GST, WithOutGST, CustSaveRs, CustSavePer, MSMarginRs, MSMarginPer, MSPurRate FROM dbo.MarginMst AS M INNER JOIN dbo.ProductMst AS P ON M.ProductCode = P.ProductCode INNER JOIN dbo.MktCompanyMst AS MKT ON P.MktCompanyCode = MKT.MktCompanyCode").AsQueryable();
                 if (filter.ProductCode > 0)
@@ -85,7 +94,12 @@ namespace ProductWebAPI_Repository.Service
                 int TotalPages = (int)Math.Ceiling(count / (double)PageSize);
                 // Returns List of Customer after applying Paging   
                 var items = margin.Skip((CurrentPage - 1) * PageSize).Take(PageSize).ToList();
-                return items;
+
+                mModel.Margin_2_2_List = items;
+                pModel.pageNumber = CurrentPage;
+                pModel.TotalCount = TotalCount;
+                mModel.PagingDetails = pModel;
+                return mModel; 
             }
             catch (Exception ex)
             {
@@ -94,10 +108,12 @@ namespace ProductWebAPI_Repository.Service
             }
         }
 
-        public List<Margin_2_4_Model> GetMargin_2_4(MarginFilter filter)
+        public Margin_2_4PagingModel GetMargin_2_4(MarginFilter filter)
         {
             try
             {
+                Margin_2_4PagingModel mModel = new Margin_2_4PagingModel();
+                PagingModel pModel = new PagingModel();
                 IQueryable<Margin_2_4_Model> margin = new Margin_2_4_Model[] { }.AsQueryable();
                 margin = context.Database.SqlQuery<Margin_2_4_Model>("SELECT MarginMstID, P.ProductCode, P.ProductName, MKT.MktCompanyName, BatchNo, BatchNo, Expiry, MRP, SalRate, PurRate, GSTPer, GST, WithOutGST, CustSaveRs, CustSavePer, WSMarginRs, WSMarginPer, MSPurRate FROM dbo.MarginMst AS M INNER JOIN dbo.ProductMst AS P ON M.ProductCode = P.ProductCode INNER JOIN dbo.MktCompanyMst AS MKT ON P.MktCompanyCode = MKT.MktCompanyCode").AsQueryable();
                 if (filter.ProductCode > 0)
@@ -119,7 +135,11 @@ namespace ProductWebAPI_Repository.Service
                 int TotalPages = (int)Math.Ceiling(count / (double)PageSize);
                 // Returns List of Customer after applying Paging   
                 var items = margin.Skip((CurrentPage - 1) * PageSize).Take(PageSize).ToList();
-                return items;
+                mModel.Margin_2_4_List = items;
+                pModel.pageNumber = CurrentPage;
+                pModel.TotalCount = TotalCount;
+                mModel.PagingDetails = pModel;
+                return mModel;
             }
             catch (Exception ex)
             {
@@ -128,10 +148,12 @@ namespace ProductWebAPI_Repository.Service
             }
         }
 
-        public List<Margin_2_6_Model> GetMargin_2_6(MarginFilter filter)
+        public Margin_2_6PagingModel GetMargin_2_6(MarginFilter filter)
         {
             try
             {
+                Margin_2_6PagingModel mModel = new Margin_2_6PagingModel();
+                PagingModel pModel = new PagingModel();
                 IQueryable<Margin_2_6_Model> margin = new Margin_2_6_Model[] { }.AsQueryable();
                 margin = context.Database.SqlQuery<Margin_2_6_Model>("SELECT MarginMstID, P.ProductCode, P.ProductName, MKT.MktCompanyName, BatchNo, BatchNo, Expiry, MRP, SalRate, PurRate, GSTPer, GST, WithOutGST, CustSaveRs, CustSavePer, OSMarginRs, OSMarginPer, MSPurRate FROM dbo.MarginMst AS M INNER JOIN dbo.ProductMst AS P ON M.ProductCode = P.ProductCode INNER JOIN dbo.MktCompanyMst AS MKT ON P.MktCompanyCode = MKT.MktCompanyCode").AsQueryable();
                 if (filter.ProductCode > 0)
@@ -153,7 +175,11 @@ namespace ProductWebAPI_Repository.Service
                 int TotalPages = (int)Math.Ceiling(count / (double)PageSize);
                 // Returns List of Customer after applying Paging   
                 var items = margin.Skip((CurrentPage - 1) * PageSize).Take(PageSize).ToList();
-                return items;
+                mModel.Margin_2_6_List = items;
+                pModel.pageNumber = CurrentPage;
+                pModel.TotalCount = TotalCount;
+                mModel.PagingDetails = pModel;
+                return mModel;
             }
             catch (Exception ex)
             {
@@ -162,10 +188,12 @@ namespace ProductWebAPI_Repository.Service
             }
         }
 
-        public List<Margin_3_3_Model> GetMargin_3_3(MarginFilter filter)
+        public Margin_3_3PagingModel GetMargin_3_3(MarginFilter filter)
         {
             try
             {
+                Margin_3_3PagingModel mModel = new Margin_3_3PagingModel();
+                PagingModel pModel = new PagingModel();
                 IQueryable<Margin_3_3_Model> margin = new Margin_3_3_Model[] { }.AsQueryable();
                 margin = context.Database.SqlQuery<Margin_3_3_Model>("SELECT MarginMstID, P.ProductCode, P.ProductName, MKT.MktCompanyName, BatchNo, BatchNo, Expiry, MRP, SalRate, PurRate, GSTPer, GST, WithOutGST, CustSaveRs, CustSavePer, MFMarginRs, MFMarginPer, MSPurRs FROM dbo.MarginMst AS M INNER JOIN dbo.ProductMst AS P ON M.ProductCode = P.ProductCode INNER JOIN dbo.MktCompanyMst AS MKT ON P.MktCompanyCode = MKT.MktCompanyCode").AsQueryable();
                 if (filter.ProductCode > 0)
@@ -187,7 +215,11 @@ namespace ProductWebAPI_Repository.Service
                 int TotalPages = (int)Math.Ceiling(count / (double)PageSize);
                 // Returns List of Customer after applying Paging   
                 var items = margin.Skip((CurrentPage - 1) * PageSize).Take(PageSize).ToList();
-                return items;
+                mModel.Margin_3_3_List = items;
+                pModel.pageNumber = CurrentPage;
+                pModel.TotalCount = TotalCount;
+                mModel.PagingDetails = pModel;
+                return mModel;
             }
             catch (Exception ex)
             {
@@ -196,10 +228,12 @@ namespace ProductWebAPI_Repository.Service
             }
         }
 
-        public List<Margin_3_5_Model> GetMargin_3_5(MarginFilter filter)
+        public Margin_3_5PagingModel GetMargin_3_5(MarginFilter filter)
         {
             try
             {
+                Margin_3_5PagingModel mModel = new Margin_3_5PagingModel();
+                PagingModel pModel = new PagingModel();
                 IQueryable<Margin_3_5_Model> margin = new Margin_3_5_Model[] { }.AsQueryable();
                 margin = context.Database.SqlQuery<Margin_3_5_Model>("SELECT MarginMstID, ProductCode, P.ProductName, MKT.MktCompanyName, BatchNo, BatchNo, Expiry, MRP, SalRate, PurRate, GSTPer, GST, WithOutGST, CustSaveRs, CustSavePer, WFMarginRs, WFMarginPer, MSPurRs FROM dbo.MarginMst AS M INNER JOIN dbo.ProductMst AS P ON M.ProductCode = P.ProductCode INNER JOIN dbo.MktCompanyMst AS MKT ON P.MktCompanyCode = MKT.MktCompanyCode").AsQueryable();
                 if (filter.ProductCode > 0)
@@ -221,7 +255,11 @@ namespace ProductWebAPI_Repository.Service
                 int TotalPages = (int)Math.Ceiling(count / (double)PageSize);
                 // Returns List of Customer after applying Paging   
                 var items = margin.Skip((CurrentPage - 1) * PageSize).Take(PageSize).ToList();
-                return items;
+                mModel.Margin_3_5_List = items;
+                pModel.pageNumber = CurrentPage;
+                pModel.TotalCount = TotalCount;
+                mModel.PagingDetails = pModel;
+                return mModel;
             }
             catch (Exception ex)
             {
@@ -230,10 +268,12 @@ namespace ProductWebAPI_Repository.Service
             }
         }
 
-        public List<Margin_3_7_Model> GetMargin_3_7(MarginFilter filter)
+        public Margin_3_7PagingModel GetMargin_3_7(MarginFilter filter)
         {
             try
             {
+                Margin_3_7PagingModel mModel = new Margin_3_7PagingModel();
+                PagingModel pModel = new PagingModel();
                 IQueryable<Margin_3_7_Model> margin = new Margin_3_7_Model[] { }.AsQueryable();
                 margin = context.Database.SqlQuery<Margin_3_7_Model>("SELECT MarginMstID, ProductCode, P.ProductName, MKT.MktCompanyName, BatchNo, BatchNo, Expiry, MRP, SalRate, PurRate, GSTPer, GST, WithOutGST, CustSaveRs, CustSavePer, WFMarginRs, WFMarginPer, MSPurRs FROM dbo.MarginMst AS M INNER JOIN dbo.ProductMst AS P ON M.ProductCode = P.ProductCode INNER JOIN dbo.MktCompanyMst AS MKT ON P.MktCompanyCode = MKT.MktCompanyCode").AsQueryable();
                 if (filter.ProductCode > 0)
@@ -255,7 +295,11 @@ namespace ProductWebAPI_Repository.Service
                 int TotalPages = (int)Math.Ceiling(count / (double)PageSize);
                 // Returns List of Customer after applying Paging   
                 var items = margin.Skip((CurrentPage - 1) * PageSize).Take(PageSize).ToList();
-                return items;
+                mModel.Margin_3_7_List = items;
+                pModel.pageNumber = CurrentPage;
+                pModel.TotalCount = TotalCount;
+                mModel.PagingDetails = pModel;
+                return mModel;
             }
             catch (Exception ex)
             {

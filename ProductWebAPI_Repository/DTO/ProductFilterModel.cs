@@ -37,5 +37,5 @@ namespace ProductWebAPI_Repository.DTO
                 _pageSize = (value > maxPageSize) ? maxPageSize : value;
             }
         }
-    }
+    } 
 }

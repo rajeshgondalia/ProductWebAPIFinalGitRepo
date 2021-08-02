@@ -63,11 +63,12 @@ namespace ProductWebAPI.Controllers
         public HttpResponseMessage GetProducts(ProductFilterModel filter)
         { 
             string returnData = "";
-            List<ProductModel> productList = new List<ProductModel>();
-            JilResponse<ProductModel> Response = new JilResponse<ProductModel>();
+            //List<ProductPagingModel> productList = new List<ProductPagingModel>();
+            ProductPagingModel pModel = new ProductPagingModel();
+            JilResponse<ProductPagingModel> Response = new JilResponse<ProductPagingModel>();
             try
-            { 
-                productList = _IProduct_Repository.ProductListCompanyWise(filter);
+            {
+                pModel = _IProduct_Repository.ProductListCompanyWise(filter);
                 message = "Product Record Fetched!";
                 status = true;
             }
@@ -80,7 +81,7 @@ namespace ProductWebAPI.Controllers
 
             Response.status = status;
             Response.Message = message;
-            Response.data = productList;
+            Response.Result = pModel;
 
             using (var output = new StringWriter())
             {

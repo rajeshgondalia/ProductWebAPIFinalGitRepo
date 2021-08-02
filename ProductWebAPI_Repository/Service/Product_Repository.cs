@@ -25,10 +25,12 @@ namespace ProductWebAPI_Repository.Service
             context = new MED_GENMEDEntities();
         }
 
-        public List<ProductModel> ProductListCompanyWise(ProductFilterModel filter)
+        public ProductPagingModel ProductListCompanyWise(ProductFilterModel filter)
         {
             try
-            { 
+            {
+                ProductPagingModel pModel = new ProductPagingModel();
+                PagingModel pageModel = new PagingModel();
                 var prod = context.Database.SqlQuery<ProductModel>("SELECT  P.ProductMstID, P.ProductCode, P.ProductName, P.SubProductCode, SP.SubProductName, SP.MainProductCode, MP.MainProductName, P.GenericCode, P.MfgCompanyCode, MFG.MfgCompanyName, " +
                          "P.MktCompanyCode, MKT.MktCompanyName, MKT.DivisionCode, DIV.DivisionName, P.DiseaseCode, DI.DiseaseName, DI.Alert AS DAlert, P.StorageCode, ST.StorageName, P.TabletTypeCode, TT.TabletTypeName, P.Tax, " +
                          "P.HSNCode, P.Qty, P.NoOfQty, P.TotQty, P.UnitCode, UN.UnitName, P.Packing, P.QtyBox, P.QtyCartoon, P.MaxStock, P.MinStock, P.OpeningStock, P.SortID, P.Active, P.Contain, P.Pharma, P.Wellness, " +
@@ -116,7 +118,12 @@ namespace ProductWebAPI_Repository.Service
                 // Returns List of Customer after applying Paging   
                 var items = prod.Skip((CurrentPage - 1) * PageSize).Take(PageSize).ToList();
 
-                return items;
+                pModel.ProductList = items;
+                pageModel.pageNumber = CurrentPage;
+                pageModel.TotalCount = TotalCount;
+                pModel.PagingDetails = pageModel;
+
+                return pModel;
             }
             catch (Exception ex)
             {

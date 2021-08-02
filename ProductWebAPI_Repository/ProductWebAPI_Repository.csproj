@@ -306,9 +306,11 @@
     <Compile Include="Data\UnitMst.cs">
       <DependentUpon>ProductEDMX.tt</DependentUpon>
     </Compile>
+    <Compile Include="DTO\Bill_2_Model.cs" />
+    <Compile Include="DTO\Bill_3_Model.cs" />
     <Compile Include="DTO\ContainModel.cs" />
     <Compile Include="DTO\DiseaseModel.cs" />
-    <Compile Include="DTO\GetAPIBill_2_FilterModel.cs" />
+    <Compile Include="DTO\GetBillFilterModel.cs" />
     <Compile Include="DTO\MarginFilter.cs" />
     <Compile Include="DTO\MarginModel.cs" />
     <Compile Include="DTO\Margin_1_1_Model.cs" />
@@ -325,6 +327,7 @@
     <Compile Include="DTO\StockModel.cs" />
     <Compile Include="DTO\UserBranchModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceContract\IBill_Repository.cs" />
     <Compile Include="ServiceContract\IError_Repository.cs" />
     <Compile Include="ServiceContract\IMargin_Repository.cs" />
     <Compile Include="ServiceContract\IMenu_Repository.cs" />
@@ -332,6 +335,7 @@
     <Compile Include="ServiceContract\IProduct_Repository.cs" />
     <Compile Include="ServiceContract\IStock_Repository.cs" />
     <Compile Include="ServiceContract\IUser_Repository.cs" />
+    <Compile Include="Service\Bill_Repository.cs" />
     <Compile Include="Service\Error_Repository.cs" />
     <Compile Include="Service\Margin_Repository.cs" />
     <Compile Include="Service\Menu_Repository.cs" />

@@ -544,6 +544,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Common\APIResponse.cs" />
     <Compile Include="Common\JilFormatter.cs" />
+    <Compile Include="Controllers\BillController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\MarginController.cs" />
     <Compile Include="Controllers\MenuController.cs" />

@@ -63,7 +63,7 @@ namespace ProductWebAPI_Repository.Service
                 UBModel.CrDel = UserDetatils.CrDel;
                 UBModel.CrEdit = UserDetatils.CrEdit;
                 UBModel.CrName = UserDetatils.CrName;
-                UBModel.CrPass = UserDetatils.CrPass;
+               // UBModel.CrPass = UserDetatils.CrPass;
                 UBModel.LogInName = UserDetatils.LogInName;
                 UBModel.MBranchCode = UserDetatils.MBranchCode;
                 UBModel.PrintPreview = UserDetatils.PrintPreview;
@@ -74,22 +74,110 @@ namespace ProductWebAPI_Repository.Service
                                               SubTypeCode = b.SubTypeCode,
                                               BranchTypeName = b.BranchTypeName
                                           }).ToList();
-                // Branch Master Details
-                UBModel.BranchList = (from b in context.BranchMsts.Where(x => x.BranchCode == UserDetatils.BranchCode)
-                                      select new BranchModel
-                                      {
-                                          BranchName = b.BranchName,
-                                          TaxType = b.TaxType,
-                                          Pharma = b.Pharma,
-                                          Wellness = b.Wellness,
-                                          Online = b.Online,
-                                          Other = b.Other,
-                                          Address = b.Address,
-                                          ShopAddress = b.ShopAddress,
-                                          Mob1 = b.Mob1,
-                                          GstNo = b.GstNo,
-                                          LanType = b.LanType
-                                      }).ToList();
+                //// Branch Master Details
+                //UBModel.BranchList = (from b in context.BranchMsts.Where(x => x.BranchCode == UserDetatils.BranchCode)
+                //                      select new BranchModel
+                //                      {
+                //                          BranchName = b.BranchName,
+                //                          TaxType = b.TaxType,
+                //                          Pharma = b.Pharma,
+                //                          Wellness = b.Wellness,
+                //                          Online = b.Online,
+                //                          Other = b.Other,
+                //                          Address = b.Address,
+                //                          ShopAddress = b.ShopAddress,
+                //                          Mob1 = b.Mob1,
+                //                          GstNo = b.GstNo,
+                //                          LanType = b.LanType
+                //                      }).ToList();
+                if (UBModel.BranchTypeList[0].SubTypeCode == 2)
+                {
+                    UBModel.BranchList = (from b in context.BranchMsts.Where(x => x.BranchCode == UserDetatils.BranchCode)
+                                          select new BranchModel
+                                          {
+                                              BranchName = b.BranchName,
+                                              ContactPerson = b.ContactPerson,
+                                              Address = b.Address,
+                                              BranchTypeCode = b.BranchTypeCode,
+                                              AreaCode = b.AreaCode,
+                                              Mob1 = b.Mob1,
+                                              Mob2 = b.Mob2,
+                                              EmailID = b.EmailID,
+                                              Pwd = b.Pwd,
+                                              DOB = b.DOB,
+                                              AnniversaryDate = b.AnniversaryDate,
+                                              GstNo = b.GstNo,
+                                              PanNo = b.PanNo,
+                                              TaxType = b.TaxType,
+                                              LanType = b.LanType,
+                                              BankCode = b.BankCode,
+                                              BankAddress = b.BankAddress,
+                                              IFSCCode = b.IFSCCode,
+                                              BankAcNo = b.BankAcNo,
+                                              OpeningBalance = b.OpeningBalance,
+                                              DrugLicNo1 = b.DrugLicNo1,
+                                              DrugLicNo2 = b.DrugLicNo2,
+                                              DrugLicNo3 = b.DrugLicNo3,
+                                              DrugLicNo4 = b.DrugLicNo4,
+                                              ShopEstablishment = b.ShopEstablishment,
+                                              Discount = b.Discount,
+                                              CreditLimit = b.CreditLimit,
+                                              FirmType = b.FirmType,
+                                              Pharma = b.Pharma,
+                                              Wellness = b.Wellness,
+                                              Online = b.Online,
+                                              Other = b.Other,
+                                              Active = b.Active,
+                                              BRCODE = b.BRCODE,
+                                              Dist = b.Dist,
+                                              ChatID = b.ChatID,
+                                              ShopAddress = b.ShopAddress
+                                          }).ToList();
+                }
+                if (UBModel.BranchTypeList[0].SubTypeCode == 3)
+                {
+                    UBModel.BranchList = (from b in context.BranchMsts.Where(x => x.BranchCode == UserDetatils.MBranchCode)
+                                          select new BranchModel
+                                          {
+                                              BranchName = b.BranchName,
+                                              ContactPerson = b.ContactPerson,
+                                              Address = b.Address,
+                                              BranchTypeCode = b.BranchTypeCode,
+                                              AreaCode = b.AreaCode,
+                                              Mob1 = b.Mob1,
+                                              Mob2 = b.Mob2,
+                                              EmailID = b.EmailID,
+                                              Pwd = b.Pwd,
+                                              DOB = b.DOB,
+                                              AnniversaryDate = b.AnniversaryDate,
+                                              GstNo = b.GstNo,
+                                              PanNo = b.PanNo,
+                                              TaxType = b.TaxType,
+                                              LanType = b.LanType,
+                                              BankCode = b.BankCode,
+                                              BankAddress = b.BankAddress,
+                                              IFSCCode = b.IFSCCode,
+                                              BankAcNo = b.BankAcNo,
+                                              OpeningBalance = b.OpeningBalance,
+                                              DrugLicNo1 = b.DrugLicNo1,
+                                              DrugLicNo2 = b.DrugLicNo2,
+                                              DrugLicNo3 = b.DrugLicNo3,
+                                              DrugLicNo4 = b.DrugLicNo4,
+                                              ShopEstablishment = b.ShopEstablishment,
+                                              Discount = b.Discount,
+                                              CreditLimit = b.CreditLimit,
+                                              FirmType = b.FirmType,
+                                              Pharma = b.Pharma,
+                                              Wellness = b.Wellness,
+                                              Online = b.Online,
+                                              Other = b.Other,
+                                              Active = b.Active,
+                                              BRCODE = b.BRCODE,
+                                              Dist = b.Dist,
+                                              ChatID = b.ChatID,
+                                              ShopAddress = b.ShopAddress
+                                          }).ToList();
+                }
                 return UBModel;
             }
             catch(Exception ex)

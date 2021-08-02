@@ -95,6 +95,14 @@ namespace ProductWebAPI_Repository.Data
         public virtual DbSet<ProductMst> ProductMsts { get; set; }
         public virtual DbSet<Stock_Genmed> Stock_Genmed { get; set; }
         public virtual DbSet<Stock_Stockist> Stock_Stockist { get; set; }
+        public virtual DbSet<DivisionMst> DivisionMsts { get; set; }
+        public virtual DbSet<SaleInvoiceDet> SaleInvoiceDets { get; set; }
+        public virtual DbSet<SaleInvoiceDet_1> SaleInvoiceDet_1 { get; set; }
+        public virtual DbSet<SaleInvoiceMst> SaleInvoiceMsts { get; set; }
+        public virtual DbSet<SaleReturnDet> SaleReturnDets { get; set; }
+        public virtual DbSet<SaleReturnDet_1> SaleReturnDet_1 { get; set; }
+        public virtual DbSet<SaleReturnMst> SaleReturnMsts { get; set; }
+        public virtual DbSet<ScheduleMst> ScheduleMsts { get; set; }
     
         public virtual int ProductMst_bulkdelete(Nullable<long> sync_min_timestamp, Nullable<int> sync_scope_local_id)
         {

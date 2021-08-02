@@ -96,6 +96,9 @@
     <Compile Include="Data\DiseaseMst.cs">
       <DependentUpon>ProductEDMX.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\DivisionMst.cs">
+      <DependentUpon>ProductEDMX.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\ErrorLogMaster.cs">
       <DependentUpon>ProductEDMX.tt</DependentUpon>
     </Compile>
@@ -223,6 +226,27 @@
       <DependentUpon>ProductEDMX.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\ReportTypeMst.cs">
+      <DependentUpon>ProductEDMX.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SaleInvoiceDet.cs">
+      <DependentUpon>ProductEDMX.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SaleInvoiceDet_1.cs">
+      <DependentUpon>ProductEDMX.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SaleInvoiceMst.cs">
+      <DependentUpon>ProductEDMX.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SaleReturnDet.cs">
+      <DependentUpon>ProductEDMX.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SaleReturnDet_1.cs">
+      <DependentUpon>ProductEDMX.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SaleReturnMst.cs">
+      <DependentUpon>ProductEDMX.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ScheduleMst.cs">
       <DependentUpon>ProductEDMX.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\StateMst.cs">

@@ -19,7 +19,7 @@ using ProductWebAPI_Repository.DTO;
 
 namespace ProductWebAPI.Controllers
 {
-    [Authorize]
+   // [Authorize]
     public class ProductController : ApiController
     {
         private readonly APIResponse _api;
@@ -31,7 +31,7 @@ namespace ProductWebAPI.Controllers
             _api = new APIResponse();
             this._IProduct_Repository = new Product_Repository();
             this._IUser_Repository = new User_Repository();
-            this._IError_Repository = new Error_Repository();
+            this._IError_Repository = new Error_Repository(); 
         }
 
         bool status = true;
@@ -68,9 +68,21 @@ namespace ProductWebAPI.Controllers
             JilResponse<ProductPagingModel> Response = new JilResponse<ProductPagingModel>();
             try
             {
-                pModel = _IProduct_Repository.ProductListCompanyWise(filter);
-                message = "Product Record Fetched!";
-                status = true;
+                var identity = (ClaimsIdentity)User.Identity;
+                var UserId = identity.Claims.Where(c => c.Type == "CrId").Select(c => c.Value).FirstOrDefault();
+                int CrId = Convert.ToInt32(UserId);
+                bool isAlreadyLogged = _IUser_Repository.CheckUserAvailableInLoginInfo(CrId);
+                if (isAlreadyLogged)
+                {
+                    pModel = _IProduct_Repository.ProductListCompanyWise(filter);
+                    message = "Product Record Fetched!";
+                    status = true;
+                }
+                else
+                {
+                    status = false;
+                    message = "UnAuthorized";
+                } 
             }
             catch (Exception ex)
             {

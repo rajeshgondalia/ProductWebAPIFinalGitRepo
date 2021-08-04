@@ -15,5 +15,8 @@ namespace ProductWebAPI_Repository.ServiceContract
         UserBranchModel GetUserBranchDetailsById(int CrId); 
         IQueryable<LogInInfo> GetAllLogInfo();
         bool CheckUserAvailableInLoginInfo(int UserId);
+
+        void InsertLoginInfo(LogInInfo infor);
+        void DeleteLoginInfo(int UserID);
     }
 }

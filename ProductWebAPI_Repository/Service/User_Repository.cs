@@ -199,6 +199,37 @@ namespace ProductWebAPI_Repository.Service
                 throw;
             }
         }
+
+        public void InsertLoginInfo(LogInInfo info)
+        {
+            try
+            {
+                context.LogInInfoes.Add(info);
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                ex.SetLog("InsertLoginInfo,Repository");
+                throw;
+            }
+        }
+
+        public void DeleteLoginInfo(int UserID)
+        {
+            try
+            {
+                LogInInfo info = context.LogInInfoes.Where(x => x.UserID == UserID).FirstOrDefault();
+                context.LogInInfoes.Remove(info);
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                ex.SetLog("InsertLoginInfo,Repository");
+                throw;
+            }
+        }
+
+
         public bool CheckUserAvailableInLoginInfo(int UserId)
         {
             return context.LogInInfoes.Any(x => x.UserID == UserId);

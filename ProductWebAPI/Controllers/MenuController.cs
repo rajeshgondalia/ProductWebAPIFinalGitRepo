@@ -25,12 +25,14 @@ namespace ProductWebAPI.Controllers
         private readonly APIResponse _api;
         private IMenu_Repository _IMenu_Repository;
         private IError_Repository _IError_Repository;
+        private IUser_Repository _IUser_Repository;
 
         public MenuController()
         {
             _api = new APIResponse();
             this._IMenu_Repository = new Menu_Repository();
             this._IError_Repository = new Error_Repository();
+            this._IUser_Repository = new User_Repository();
         }
 
         bool status = true;
@@ -47,9 +49,18 @@ namespace ProductWebAPI.Controllers
             JilResponse<MainMenuModel> Response = new JilResponse<MainMenuModel>();
             try
             {
-                menulist = this._IMenu_Repository.MenuList(CrId);
-                status = true;
-                message = "Users Record Fetched!";
+                bool isAlreadyLogged = _IUser_Repository.CheckUserAvailableInLoginInfo(CrId);
+                if (isAlreadyLogged)
+                {
+                    menulist = this._IMenu_Repository.MenuList(CrId);
+                    status = true;
+                    message = "Users Record Fetched!";
+                }
+                else
+                {
+                    status = false;
+                    message = "UnAuthorized";
+                }  
             }
             catch (Exception ex)
             {

@@ -16,6 +16,11 @@ using System.Text;
 using Jil;
 using System.Security.Claims;
 using ProductWebAPI_Repository.DTO;
+using Microsoft.AspNet.Identity;
+using System.Web;
+using System.Threading.Tasks;
+using Microsoft.Owin.Security.OAuth;
+using Microsoft.Owin.Security.Cookies;
 
 namespace ProductWebAPI.Controllers
 {
@@ -50,10 +55,18 @@ namespace ProductWebAPI.Controllers
             try
             {
                 int CrId = Convert.ToInt32(UserId);
-                userMaster = _IUser_Repository.GetUserBranchDetailsById(CrId);
-
-                status = true;
-                message = "Users Record Fetched!";
+                bool isAlreadyLogged = _IUser_Repository.CheckUserAvailableInLoginInfo(CrId);
+                if (isAlreadyLogged)
+                {
+                    userMaster = _IUser_Repository.GetUserBranchDetailsById(CrId);
+                    status = true;
+                    message = "Users Record Fetched!";
+                }
+                else
+                {
+                    status = false;
+                    message = "UnAuthorized";
+                } 
             }
             catch (Exception ex)
             {
@@ -85,9 +98,21 @@ namespace ProductWebAPI.Controllers
             JilResponse<ContainModel> Response = new JilResponse<ContainModel>();
             try
             {
-                containMaster = _IOther_Repository.GetAllContain();
-                status = true;
-                message = "Contain Record Fetched!";
+                var identity = (ClaimsIdentity)User.Identity;
+                var UserId = identity.Claims.Where(c => c.Type == "CrId").Select(c => c.Value).FirstOrDefault();
+                int CrId = Convert.ToInt32(UserId);
+                bool isAlreadyLogged = _IUser_Repository.CheckUserAvailableInLoginInfo(CrId);
+                if (isAlreadyLogged)
+                {
+                    containMaster = _IOther_Repository.GetAllContain();
+                    status = true;
+                    message = "Contain Record Fetched!";
+                }
+                else
+                {
+                    status = false;
+                    message = "UnAuthorized";
+                } 
             }
             catch (Exception ex)
             {
@@ -116,9 +141,21 @@ namespace ProductWebAPI.Controllers
             JilResponse<DiseaseModel> Response = new JilResponse<DiseaseModel>();
             try
             {
-                diseaseMaster = _IOther_Repository.GetAllDisease();
-                status = true;
-                message = "Disease Record Fetched!";
+                var identity = (ClaimsIdentity)User.Identity;
+                var UserId = identity.Claims.Where(c => c.Type == "CrId").Select(c => c.Value).FirstOrDefault();
+                int CrId = Convert.ToInt32(UserId);
+                bool isAlreadyLogged = _IUser_Repository.CheckUserAvailableInLoginInfo(CrId);
+                if (isAlreadyLogged)
+                {
+                    diseaseMaster = _IOther_Repository.GetAllDisease();
+                    status = true;
+                    message = "Disease Record Fetched!";
+                }
+                else
+                {
+                    status = false;
+                    message = "UnAuthorized";
+                } 
             }
             catch (Exception ex)
             {
@@ -129,6 +166,29 @@ namespace ProductWebAPI.Controllers
             Response.status = status;
             Response.Message = message;
             Response.data = diseaseMaster;
+            using (var output = new StringWriter())
+            {
+                Jil.JSON.Serialize(Response, output);
+                returnData = output.ToString();
+            }
+            var response = Request.CreateResponse(HttpStatusCode.OK);
+            response.Content = new StringContent(returnData, Encoding.UTF8, "application/json");
+            return response;
+        }
+
+        [HttpGet]
+        public HttpResponseMessage Logout()
+        {
+            var identity = (ClaimsIdentity)User.Identity;
+            var UserId = identity.Claims.Where(c => c.Type == "CrId").Select(c => c.Value).FirstOrDefault();
+            int CrId = Convert.ToInt32(UserId);
+
+            _IUser_Repository.DeleteLoginInfo(CrId); 
+
+            string returnData = string.Empty;
+            JilResponse<string> Response = new JilResponse<string>();
+            Response.status = true;
+            Response.Message = "Logout Successfully!"; 
             using (var output = new StringWriter())
             {
                 Jil.JSON.Serialize(Response, output);

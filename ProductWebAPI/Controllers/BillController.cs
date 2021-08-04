@@ -25,12 +25,14 @@ namespace ProductWebAPI.Controllers
         private readonly APIResponse _api;
         private IBill_Repository _IBill_Repository;
         private IError_Repository _IError_Repository;
+        private IUser_Repository _IUser_Repository;
 
         public BillController()
         {
             _api = new APIResponse();
             this._IBill_Repository = new Bill_Repository();
             this._IError_Repository = new Error_Repository();
+            this._IUser_Repository = new User_Repository();
         }
 
         bool status = true;
@@ -43,50 +45,62 @@ namespace ProductWebAPI.Controllers
             string returnData = "";
             try
             {
-                if (filter.SubTypeCode == 2)
+                var identity = (ClaimsIdentity)User.Identity;
+                var UserId = identity.Claims.Where(c => c.Type == "CrId").Select(c => c.Value).FirstOrDefault();
+                int CrId = Convert.ToInt32(UserId);
+                bool isAlreadyLogged = _IUser_Repository.CheckUserAvailableInLoginInfo(CrId);
+                if (isAlreadyLogged)
                 {
-                    JilResponse<BillPaging_2_Model> marginResponse = new JilResponse<BillPaging_2_Model>();
-                    BillPaging_2_Model BillReturnList = new BillPaging_2_Model();
-                    BillReturnList = _IBill_Repository.GetReturnBillList(filter);
-                    message = "Bill Return Record Fetched!";
-                    status = true;
-
-                    marginResponse.status = status;
-                    marginResponse.Message = message;
-                    marginResponse.Result = BillReturnList;
-
-                    using (var output = new StringWriter())
+                    if (filter.SubTypeCode == 2)
                     {
-                        Jil.JSON.Serialize(marginResponse, output);
-                        returnData = output.ToString();
+                        JilResponse<BillPaging_2_Model> marginResponse = new JilResponse<BillPaging_2_Model>();
+                        BillPaging_2_Model BillReturnList = new BillPaging_2_Model();
+                        BillReturnList = _IBill_Repository.GetReturnBillList(filter);
+                        message = "Bill Return Record Fetched!";
+                        status = true;
+
+                        marginResponse.status = status;
+                        marginResponse.Message = message;
+                        marginResponse.Result = BillReturnList;
+
+                        using (var output = new StringWriter())
+                        {
+                            Jil.JSON.Serialize(marginResponse, output);
+                            returnData = output.ToString();
+                        }
+                        var response = Request.CreateResponse(HttpStatusCode.OK);
+                        response.Content = new StringContent(returnData, Encoding.UTF8, "application/json");
+                        return response;
                     }
-                    var response = Request.CreateResponse(HttpStatusCode.OK);
-                    response.Content = new StringContent(returnData, Encoding.UTF8, "application/json");
-                    return response;
+                    else if (filter.SubTypeCode == 3)
+                    {
+                        JilResponse<BillPaging_3_Model> marginResponse = new JilResponse<BillPaging_3_Model>();
+                        BillPaging_3_Model BillOrderList = new BillPaging_3_Model();
+                        BillOrderList = _IBill_Repository.GetOrderBillList(filter);
+                        message = "Bill Order Record Fetched!";
+                        status = true;
+
+                        marginResponse.status = status;
+                        marginResponse.Message = message;
+                        marginResponse.Result = BillOrderList;
+
+                        using (var output = new StringWriter())
+                        {
+                            Jil.JSON.Serialize(marginResponse, output);
+                            returnData = output.ToString();
+                        }
+                        var response = Request.CreateResponse(HttpStatusCode.OK);
+                        response.Content = new StringContent(returnData, Encoding.UTF8, "application/json");
+                        return response;
+                    }
+                    message = "Invalid Parameter!";
+                    status = true;
                 }
-                else if (filter.SubTypeCode == 3)
+                else
                 {
-                    JilResponse<BillPaging_3_Model> marginResponse = new JilResponse<BillPaging_3_Model>();
-                    BillPaging_3_Model BillOrderList = new BillPaging_3_Model();
-                    BillOrderList = _IBill_Repository.GetOrderBillList(filter);
-                    message = "Bill Order Record Fetched!";
-                    status = true;
-
-                    marginResponse.status = status;
-                    marginResponse.Message = message;
-                    marginResponse.Result = BillOrderList;
-
-                    using (var output = new StringWriter())
-                    {
-                        Jil.JSON.Serialize(marginResponse, output);
-                        returnData = output.ToString();
-                    }
-                    var response = Request.CreateResponse(HttpStatusCode.OK);
-                    response.Content = new StringContent(returnData, Encoding.UTF8, "application/json");
-                    return response; 
+                    status = false;
+                    message = "UnAuthorized";
                 } 
-                message = "Invalid Parameter!";
-                status = true;
             }
             catch (Exception ex)
             {

@@ -183,5 +183,68 @@ namespace ProductWebAPI.Controllers
             Emptyresponse.Content = new StringContent(returnData, Encoding.UTF8, "application/json");
             return Emptyresponse;
         }
+
+        [HttpPost]
+        public HttpResponseMessage GetBillProducts(BillProductsFilterModel model)
+        {
+            JilResponse<MarginByBranchModel> blankResponse = new JilResponse<MarginByBranchModel>();
+            string returnData = "";
+            try
+            {
+                var identity = (ClaimsIdentity)User.Identity;
+                var UserId = identity.Claims.Where(c => c.Type == "CrId").Select(c => c.Value).FirstOrDefault();
+                int CrId = Convert.ToInt32(UserId);
+                bool isAlreadyLogged = _IUser_Repository.CheckUserAvailableInLoginInfo(CrId);
+                if (isAlreadyLogged)
+                {
+                    if (model.SubTypeCode > 0 && !string.IsNullOrEmpty(model.OrderType))
+                    {
+                        JilResponse<BillProductPagingModel> marginResponse = new JilResponse<BillProductPagingModel>();
+                        BillProductPagingModel BillProductsList = new BillProductPagingModel();
+                        BillProductsList = _IBill_Repository.GetBillProducts(model);
+                        message = "Bill Products Record Fetched!";
+                        status = true;
+
+                        marginResponse.status = status;
+                        marginResponse.Message = message;
+                        marginResponse.Result = BillProductsList;
+
+                        using (var output = new StringWriter())
+                        {
+                            Jil.JSON.Serialize(marginResponse, output);
+                            returnData = output.ToString();
+                        }
+                        var response = Request.CreateResponse(HttpStatusCode.OK);
+                        response.Content = new StringContent(returnData, Encoding.UTF8, "application/json");
+                        return response;
+                    }                   
+                    message = "Invalid Parameter!";
+                    status = true;
+                }
+                else
+                {
+                    status = false;
+                    message = "UnAuthorized";
+                }
+            }
+            catch (Exception ex)
+            {
+                status = false;
+                message = "Bad Request!" + " - " + ex.ToString();
+                this._IError_Repository.InsertErrorLog(ex.ToString(), "GetBillProducts", "Bill/GetBillProducts");
+            }
+            blankResponse.status = status;
+            blankResponse.Message = message;
+
+            using (var output = new StringWriter())
+            {
+                Jil.JSON.Serialize(blankResponse, output);
+                returnData = output.ToString();
+            }
+            var Emptyresponse = Request.CreateResponse(HttpStatusCode.OK);
+            Emptyresponse.Content = new StringContent(returnData, Encoding.UTF8, "application/json");
+            return Emptyresponse;
+        }
+
     }
 }

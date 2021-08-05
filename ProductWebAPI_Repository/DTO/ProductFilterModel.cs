@@ -22,11 +22,11 @@ namespace ProductWebAPI_Repository.DTO
         public DateTime? ProductDate { get; set; }
         public Nullable<int> ScheduleCode { get; set; }
 
-        const int maxPageSize = 20;
+        const int maxPageSize = 500;
 
         public int pageNumber { get; set; } = 1;
 
-        public int _pageSize { get; set; } = 10;
+        public int _pageSize { get; set; } = 300;
 
         public int pageSize
         {

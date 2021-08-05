@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProductWebAPI_Repository.DTO
 {
-    public class Margin_2_4_Model
+    public class MarginByBranchModel
     {
         public int MarginMstID { get; set; }
         public int ProductCode { get; set; }
@@ -22,14 +22,14 @@ namespace ProductWebAPI_Repository.DTO
         public Nullable<decimal> WithOutGST { get; set; }
         public Nullable<decimal> CustSaveRs { get; set; }
         public Nullable<decimal> CustSavePer { get; set; }
-        public Nullable<decimal> WSMarginRs { get; set; }
-        public Nullable<decimal> WSMarginPer { get; set; }
-        public Nullable<decimal> MSPurRate { get; set; }
+        public Nullable<decimal> MarginRs { get; set; }
+        public Nullable<decimal> MarginPer { get; set; }
+        public Nullable<decimal> PurchaseRs { get; set; }
     }
 
-    public class Margin_2_4PagingModel
+    public class MarginByBranchPagingModel
     {
-        public List<Margin_2_4_Model> Margin_2_4_List { get; set; }
+        public List<MarginByBranchModel> MarginByBranchList { get; set; }
         public PagingModel PagingDetails { get; set; }
     }
 }

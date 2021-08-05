@@ -13,11 +13,14 @@ namespace ProductWebAPI_Repository.DTO
         public int ProductCode { get; set; }
         public string BatchNo { get; set; }
         public string Expiry { get; set; }
+        public bool Pharma { get; set; }
+        public bool Wellness { get; set; }
+        public bool Online { get; set; }
 
         #region PAGINATION
-        const int maxPageSize = 20;
+        const int maxPageSize = 500;
         public int pageNumber { get; set; } = 1;
-        public int _pageSize { get; set; } = 10;
+        public int _pageSize { get; set; } = 300;
         public int pageSize
         {
             get { return _pageSize; }

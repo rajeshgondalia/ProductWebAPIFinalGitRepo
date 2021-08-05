@@ -10,5 +10,6 @@ namespace ProductWebAPI_Repository.DTO
     {
         public int pageNumber { get; set; }
         public int TotalCount { get; set; }
+        public int TotalPages { get; set; }
     }
 }

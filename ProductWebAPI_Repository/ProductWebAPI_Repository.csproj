@@ -311,15 +311,9 @@
     <Compile Include="DTO\ContainModel.cs" />
     <Compile Include="DTO\DiseaseModel.cs" />
     <Compile Include="DTO\GetBillFilterModel.cs" />
+    <Compile Include="DTO\MarginByBranchModel.cs" />
     <Compile Include="DTO\MarginFilter.cs" />
     <Compile Include="DTO\MarginModel.cs" />
-    <Compile Include="DTO\Margin_1_1_Model.cs" />
-    <Compile Include="DTO\Margin_2_2_Model.cs" />
-    <Compile Include="DTO\Margin_2_4_Model.cs" />
-    <Compile Include="DTO\Margin_2_6_Model.cs" />
-    <Compile Include="DTO\Margin_3_3_Model.cs" />
-    <Compile Include="DTO\Margin_3_5_Model.cs" />
-    <Compile Include="DTO\Margin_3_7_Model.cs" />
     <Compile Include="DTO\MenuModel.cs" />
     <Compile Include="DTO\PagingModel.cs" />
     <Compile Include="DTO\ProductFilterModel.cs" />

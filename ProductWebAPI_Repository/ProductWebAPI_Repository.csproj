@@ -114,6 +114,9 @@
     <Compile Include="Data\GodownMst.cs">
       <DependentUpon>ProductEDMX.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\GOrderConfirmMst.cs">
+      <DependentUpon>ProductEDMX.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\ImgUploadMst.cs">
       <DependentUpon>ProductEDMX.tt</DependentUpon>
     </Compile>

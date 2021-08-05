@@ -290,6 +290,24 @@
           <Property Name="Ever" Type="int" />
           <Property Name="CompanyCode" Type="int" />
         </EntityType>
+        <EntityType Name="GOrderConfirmMst">
+          <Key>
+            <PropertyRef Name="GOrderConfirmMstID" />
+          </Key>
+          <Property Name="GOrderConfirmMstID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PurchaseOrderMstID" Type="int" />
+          <Property Name="BranchCode" Type="int" />
+          <Property Name="POCode" Type="int" />
+          <Property Name="GOrderConfirmDate" Type="datetime" />
+          <Property Name="Rec" Type="tinyint" />
+          <Property Name="Sflag" Type="char" MaxLength="1" />
+          <Property Name="Sdate" Type="datetime" />
+          <Property Name="LogID" Type="int" />
+          <Property Name="PcID" Type="varchar" MaxLength="50" />
+          <Property Name="Ever" Type="int" />
+          <Property Name="CompanyCode" Type="int" />
+          <Property Name="Type" Type="nvarchar" MaxLength="10" />
+        </EntityType>
         <EntityType Name="ImgUploadMst">
           <Key>
             <PropertyRef Name="ImgUploadCode" />
@@ -2326,6 +2344,7 @@ warning 6002: The table/view 'MED_GENMED.dbo.TmpGiftReportMst' does not have a p
           <EntitySet Name="GenericGroupMst" EntityType="Self.GenericGroupMst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GenericMst" EntityType="Self.GenericMst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GodownMst" EntityType="Self.GodownMst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GOrderConfirmMst" EntityType="Self.GOrderConfirmMst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ImgUploadMst" EntityType="Self.ImgUploadMst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LanguageMessage" EntityType="Self.LanguageMessage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LogInInfo" EntityType="Self.LogInInfo" Schema="dbo" store:Type="Tables" />
@@ -4606,6 +4625,7 @@ warning 6002: The table/view 'MED_GENMED.dbo.TmpGiftReportMst' does not have a p
             <End Role="SaleReturnDet" EntitySet="SaleReturnDets" />
             <End Role="SaleReturnDet1" EntitySet="SaleReturnDets" />
           </AssociationSet>
+          <EntitySet Name="GOrderConfirmMsts" EntityType="MED_GENMEDModel.GOrderConfirmMst" />
         </EntityContainer>
         <EntityType Name="ProductMst">
           <Key>
@@ -5072,6 +5092,24 @@ warning 6002: The table/view 'MED_GENMED.dbo.TmpGiftReportMst' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="GOrderConfirmMst">
+          <Key>
+            <PropertyRef Name="GOrderConfirmMstID" />
+          </Key>
+          <Property Name="GOrderConfirmMstID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PurchaseOrderMstID" Type="Int32" />
+          <Property Name="BranchCode" Type="Int32" />
+          <Property Name="POCode" Type="Int32" />
+          <Property Name="GOrderConfirmDate" Type="DateTime" Precision="3" />
+          <Property Name="Rec" Type="Byte" />
+          <Property Name="Sflag" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Sdate" Type="DateTime" Precision="3" />
+          <Property Name="LogID" Type="Int32" />
+          <Property Name="PcID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Ever" Type="Int32" />
+          <Property Name="CompanyCode" Type="Int32" />
+          <Property Name="Type" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -6863,6 +6901,25 @@ warning 6002: The table/view 'MED_GENMED.dbo.TmpGiftReportMst' does not have a p
                 <ScalarProperty Name="ScheduleName" ColumnName="ScheduleName" />
                 <ScalarProperty Name="ScheduleCode" ColumnName="ScheduleCode" />
                 <ScalarProperty Name="ScheduleMstID" ColumnName="ScheduleMstID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GOrderConfirmMsts">
+            <EntityTypeMapping TypeName="MED_GENMEDModel.GOrderConfirmMst">
+              <MappingFragment StoreEntitySet="GOrderConfirmMst">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+                <ScalarProperty Name="Ever" ColumnName="Ever" />
+                <ScalarProperty Name="PcID" ColumnName="PcID" />
+                <ScalarProperty Name="LogID" ColumnName="LogID" />
+                <ScalarProperty Name="Sdate" ColumnName="Sdate" />
+                <ScalarProperty Name="Sflag" ColumnName="Sflag" />
+                <ScalarProperty Name="Rec" ColumnName="Rec" />
+                <ScalarProperty Name="GOrderConfirmDate" ColumnName="GOrderConfirmDate" />
+                <ScalarProperty Name="POCode" ColumnName="POCode" />
+                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+                <ScalarProperty Name="PurchaseOrderMstID" ColumnName="PurchaseOrderMstID" />
+                <ScalarProperty Name="GOrderConfirmMstID" ColumnName="GOrderConfirmMstID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

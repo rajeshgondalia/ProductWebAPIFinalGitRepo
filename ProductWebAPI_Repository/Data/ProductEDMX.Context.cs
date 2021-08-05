@@ -103,6 +103,7 @@ namespace ProductWebAPI_Repository.Data
         public virtual DbSet<SaleReturnDet_1> SaleReturnDet_1 { get; set; }
         public virtual DbSet<SaleReturnMst> SaleReturnMsts { get; set; }
         public virtual DbSet<ScheduleMst> ScheduleMsts { get; set; }
+        public virtual DbSet<GOrderConfirmMst> GOrderConfirmMsts { get; set; }
     
         public virtual int ProductMst_bulkdelete(Nullable<long> sync_min_timestamp, Nullable<int> sync_scope_local_id)
         {

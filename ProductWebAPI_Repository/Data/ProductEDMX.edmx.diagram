@@ -98,6 +98,7 @@
         <EntityTypeShape EntityType="MED_GENMEDModel.ScheduleMst" Width="1.5" PointX="29.375" PointY="30.75" />
         <AssociationConnector Association="MED_GENMEDModel.FK_SaleInvoiceDetID_SaleInvoiceDetID" />
         <AssociationConnector Association="MED_GENMEDModel.FK_SaleReturnDetID_SaleReturnDetID" />
+        <EntityTypeShape EntityType="MED_GENMEDModel.GOrderConfirmMst" Width="1.5" PointX="31.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

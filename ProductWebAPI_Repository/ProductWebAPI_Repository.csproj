@@ -309,6 +309,7 @@
     <Compile Include="Data\UnitMst.cs">
       <DependentUpon>ProductEDMX.tt</DependentUpon>
     </Compile>
+    <Compile Include="DTO\BillStatusModel.cs" />
     <Compile Include="DTO\Bill_2_Model.cs" />
     <Compile Include="DTO\Bill_3_Model.cs" />
     <Compile Include="DTO\ContainModel.cs" />

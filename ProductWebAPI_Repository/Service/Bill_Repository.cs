@@ -33,7 +33,7 @@ namespace ProductWebAPI_Repository.Service
                 PagingModel pageModel = new PagingModel();
                 IQueryable<Bill_2_Model> prod;
                 if (filter.Rec == 1)
-                { 
+                {
                     prod = context.Database.SqlQuery<Bill_2_Model>("SELECT SaleInvoiceMstID AS ID, PurchaseOrderMstID, BillDate, BillNo,'ORDER' As Type " +
 "FROM dbo.SaleInvoiceMst WHERE(Rec = 1) AND(BranchCode = " + filter.BranchCode + ") AND " +
 "CONVERT(date, BillDate) BETWEEN CONVERT(date, '" + filter.FromDate + "') and CONVERT(date, '" + filter.ToDate + "') " +
@@ -41,15 +41,15 @@ namespace ProductWebAPI_Repository.Service
 "FROM dbo.SaleReturnMst WHERE(Rec = 1) AND(BranchCode = " + filter.BranchCode + ") AND " +
 "CONVERT(date, BillDate) BETWEEN CONVERT(date, '" + filter.FromDate + "') and CONVERT(date, '" + filter.ToDate + "')").AsQueryable();
                 }
-                else                
+                else
                 {
                     prod = context.Database.SqlQuery<Bill_2_Model>("SELECT SaleInvoiceMstID AS ID, PurchaseOrderMstID, BillDate, BillNo,'ORDER' As Type " +
 "FROM dbo.SaleInvoiceMst WHERE(Rec = " + filter.Rec + ") AND(BranchCode = " + filter.BranchCode + ") AND " +
 "CONVERT(date, BillDate) BETWEEN CONVERT(date, GETDATE()) and CONVERT(date, GETDATE()) " +
 "union all SELECT SaleReturnMstID AS ID, PurchaseOrderMstID, BillDate, BillNo, 'RETURN' As Type " +
 "FROM dbo.SaleReturnMst WHERE(Rec = " + filter.Rec + ") AND(BranchCode = " + filter.BranchCode + ")").AsQueryable();
-                } 
-                 
+                }
+
                 // Get's No of Rows Count   
                 int count = prod.Count();
 
@@ -105,7 +105,7 @@ namespace ProductWebAPI_Repository.Service
 "CONVERT(date, BillDate) BETWEEN CONVERT(date, GETDATE()) and CONVERT(date, GETDATE()) " +
 "union all SELECT Stockist_SaleReturnMstID AS ID, Med_PurchaseOrderMstID, BillDate, BillNo, 'RETURN' As Type " +
 "FROM dbo.Stockist_SaleReturnMst WHERE(Rec = " + filter.Rec + ") AND(MBranchCode = " + filter.BranchCode + ")").AsQueryable();
-                } 
+                }
                 // Get's No of Rows Count   
                 int count = prod.Count();
 
@@ -136,6 +136,53 @@ namespace ProductWebAPI_Repository.Service
                 ex.SetLog("GetOrderBillList,Repository");
                 throw;
             }
+        }
+
+        public int UpdateBillStatus(BillStatusModel model)
+        {
+            if (model.SubTypeCode == 2)
+            {
+                var obj = new GOrderConfirmMst()
+                {
+                    Type = model.Type,
+                    PurchaseOrderMstID = model.OrderMstID,
+                    POCode = model.POCode,
+                    GOrderConfirmDate = DateTime.Now,
+                    Sflag = "I",
+                    Sdate = DateTime.Now,
+                    LogID = model.LogID,
+                    PcID = model.PcID,
+                    Ever = model.Ever,
+                    BranchCode = model.BranchCode,
+                    CompanyCode = 1,
+                    Rec = 0
+                };
+                context.GOrderConfirmMsts.Add(obj);
+                context.SaveChanges();
+                return obj.GOrderConfirmMstID;
+            }
+            else if (model.SubTypeCode == 2)
+            {
+                var obj = new Med_GOrderConfirmMst()
+                {
+                    Type = model.Type,
+                    Med_PurchaseOrderMstID = model.OrderMstID,
+                    POCode = model.POCode,
+                    Med_GOrderConfirmDate = DateTime.Now,
+                    Sflag = "I",
+                    Sdate = DateTime.Now,
+                    LogID = model.LogID,
+                    PcID = model.PcID,
+                    Ever = model.Ever,
+                    BranchCode = model.BranchCode,
+                    CompanyCode = 1,
+                    Rec = 0
+                };
+                context.Med_GOrderConfirmMst.Add(obj);
+                context.SaveChanges();
+                return obj.Med_GOrderConfirmMstID;
+            }
+            return 0;
         }
 
         #region IDisposable Support

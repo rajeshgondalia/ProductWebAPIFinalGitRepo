@@ -100,7 +100,7 @@ namespace ProductWebAPI.Controllers
                 {
                     status = false;
                     message = "UnAuthorized";
-                } 
+                }
             }
             catch (Exception ex)
             {
@@ -111,6 +111,69 @@ namespace ProductWebAPI.Controllers
             blankResponse.status = status;
             blankResponse.Message = message;
 
+            using (var output = new StringWriter())
+            {
+                Jil.JSON.Serialize(blankResponse, output);
+                returnData = output.ToString();
+            }
+            var Emptyresponse = Request.CreateResponse(HttpStatusCode.OK);
+            Emptyresponse.Content = new StringContent(returnData, Encoding.UTF8, "application/json");
+            return Emptyresponse;
+        }
+
+        [HttpPost]
+        public HttpResponseMessage UpdateBillStatus(BillStatusModel model)
+        {
+            JilResponse<int> blankResponse = new JilResponse<int>();
+            string returnData = "";
+            try
+            {
+                var identity = (ClaimsIdentity)User.Identity;
+                var UserId = identity.Claims.Where(c => c.Type == "CrId").Select(c => c.Value).FirstOrDefault();
+                int CrId = Convert.ToInt32(UserId);
+                bool isAlreadyLogged = _IUser_Repository.CheckUserAvailableInLoginInfo(CrId);
+                if (isAlreadyLogged)
+                {
+                    JilResponse<int> marginResponse = new JilResponse<int>();
+                    int insertedId = _IBill_Repository.UpdateBillStatus(model);
+                    if (insertedId > 0)
+                    {
+                        message = "Bill status has been updated.";
+                        status = true;
+
+                        marginResponse.status = status;
+                        marginResponse.Message = message;
+                        marginResponse.Result = insertedId;
+
+                        using (var output = new StringWriter())
+                        {
+                            Jil.JSON.Serialize(marginResponse, output);
+                            returnData = output.ToString();
+                        }
+                        var response = Request.CreateResponse(HttpStatusCode.OK);
+                        response.Content = new StringContent(returnData, Encoding.UTF8, "application/json");
+                        return response;
+                    }
+                    else
+                    {
+                        message = "Invalid Parameter!";
+                        status = true;
+                    }                    
+                }
+                else
+                {
+                    status = false;
+                    message = "UnAuthorized";
+                }
+            }
+            catch (Exception ex)
+            {
+                status = false;
+                message = "Bad Request!" + " - " + ex.ToString();
+                this._IError_Repository.InsertErrorLog(ex.ToString(), "UpdateBillStatus", "Bill/UpdateBillStatus");
+            }
+            blankResponse.status = status;
+            blankResponse.Message = message;
             using (var output = new StringWriter())
             {
                 Jil.JSON.Serialize(blankResponse, output);

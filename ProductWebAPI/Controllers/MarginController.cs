@@ -19,6 +19,7 @@ using ProductWebAPI_Repository.DTO;
 
 namespace ProductWebAPI.Controllers
 {
+    [Authorize]
     public class MarginController : ApiController
     {
         private readonly APIResponse _api;
@@ -44,50 +45,62 @@ namespace ProductWebAPI.Controllers
             string returnData = "";
             try
             {
-                if (filter.SubTypeCode == 1 && filter.BranchTypeCode == 1)
+                var identity = (ClaimsIdentity)User.Identity;
+                var UserId = identity.Claims.Where(c => c.Type == "CrId").Select(c => c.Value).FirstOrDefault();
+                int CrId = Convert.ToInt32(UserId);
+                bool isAlreadyLogged = _IUser_Repository.CheckUserAvailableInLoginInfo(CrId);
+                if (isAlreadyLogged)
                 {
-                    JilResponse<MarginPagingModel> marginResponse = new JilResponse<MarginPagingModel>();
-                    MarginPagingModel marginList = new MarginPagingModel();
-                    marginList = _IMargin_Repository.GetAllMargin(filter);
-                    message = "Margin Record Fetched!";
-                    status = true;
-
-                    marginResponse.status = status;
-                    marginResponse.Message = message;
-                    marginResponse.Result = marginList;
-
-                    using (var output = new StringWriter())
+                    if (filter.SubTypeCode == 1 && filter.BranchTypeCode == 1)
                     {
-                        Jil.JSON.Serialize(marginResponse, output);
-                        returnData = output.ToString();
+                        JilResponse<MarginPagingModel> marginResponse = new JilResponse<MarginPagingModel>();
+                        MarginPagingModel marginList = new MarginPagingModel();
+                        marginList = _IMargin_Repository.GetAllMargin(filter);
+                        message = "Margin Record Fetched!";
+                        status = true;
+
+                        marginResponse.status = status;
+                        marginResponse.Message = message;
+                        marginResponse.Result = marginList;
+
+                        using (var output = new StringWriter())
+                        {
+                            Jil.JSON.Serialize(marginResponse, output);
+                            returnData = output.ToString();
+                        }
+                        var response = Request.CreateResponse(HttpStatusCode.OK);
+                        response.Content = new StringContent(returnData, Encoding.UTF8, "application/json");
+                        return response;
                     }
-                    var response = Request.CreateResponse(HttpStatusCode.OK);
-                    response.Content = new StringContent(returnData, Encoding.UTF8, "application/json");
-                    return response;
+                    else
+                    {
+                        JilResponse<MarginByBranchPagingModel> marginResponseByBranch = new JilResponse<MarginByBranchPagingModel>();
+                        MarginByBranchPagingModel marginList = new MarginByBranchPagingModel();
+                        marginList = _IMargin_Repository.GetMarginByBranch(filter);
+                        message = "Margin Record Fetched!";
+                        status = true;
+
+                        marginResponseByBranch.status = status;
+                        marginResponseByBranch.Message = message;
+                        marginResponseByBranch.Result = marginList;
+
+                        using (var output = new StringWriter())
+                        {
+                            Jil.JSON.Serialize(marginResponseByBranch, output);
+                            returnData = output.ToString();
+                        }
+                        var response = Request.CreateResponse(HttpStatusCode.OK);
+                        response.Content = new StringContent(returnData, Encoding.UTF8, "application/json");
+                        return response;
+                    }
+                    message = "Check parameter, Some parameter is not passed.";
+                    status = true;
                 }
                 else
                 {
-                    JilResponse<MarginByBranchPagingModel> marginResponseByBranch = new JilResponse<MarginByBranchPagingModel>();
-                    MarginByBranchPagingModel marginList = new MarginByBranchPagingModel();
-                    marginList = _IMargin_Repository.GetMarginByBranch(filter);
-                    message = "Margin Record Fetched!";
-                    status = true;
-
-                    marginResponseByBranch.status = status;
-                    marginResponseByBranch.Message = message;
-                    marginResponseByBranch.Result = marginList;
-
-                    using (var output = new StringWriter())
-                    {
-                        Jil.JSON.Serialize(marginResponseByBranch, output);
-                        returnData = output.ToString();
-                    }
-                    var response = Request.CreateResponse(HttpStatusCode.OK);
-                    response.Content = new StringContent(returnData, Encoding.UTF8, "application/json");
-                    return response;
-                }
-                message = "Check parameter, Some parameter is not passed.";
-                status = true;
+                    status = false;
+                    message = "UnAuthorized";
+                } 
             }
             catch (Exception ex)
             {

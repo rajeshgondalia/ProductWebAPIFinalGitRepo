@@ -13,5 +13,7 @@ namespace ProductWebAPI_Repository.ServiceContract
         BillPaging_2_Model GetReturnBillList(GetBillFilterModel filter);
         BillPaging_3_Model GetOrderBillList(GetBillFilterModel filter);
         int UpdateBillStatus(BillStatusModel model);
+
+        BillProductPagingModel GetBillProducts(BillProductsFilterModel filter);
     }
 }

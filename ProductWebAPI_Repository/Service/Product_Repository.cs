@@ -16,6 +16,9 @@ namespace ProductWebAPI_Repository.Service
     public class Product_Repository : IProduct_Repository, IDisposable
     {
         private MED_GENMEDEntities context;
+        public static string MarginPer = string.Empty;
+        public static string PurRate = string.Empty;
+        public static string WHERE = string.Empty;
         public Product_Repository(MED_GENMEDEntities _context)
         {
             context = _context;
@@ -98,7 +101,7 @@ namespace ProductWebAPI_Repository.Service
                 if (filter.Pharma != null)
                 {
                     prod = prod.Where(x => x.Pharma == filter.Pharma).AsQueryable();
-                }  
+                }
 
                 // Get's No of Rows Count   
                 int count = prod.Count();
@@ -129,9 +132,67 @@ namespace ProductWebAPI_Repository.Service
             {
                 ex.SetLog("ProductListCompanyWise,Repository");
                 throw;
-            } 
+            }
         }
+        public static void ChkStr() { if (WHERE == null) { WHERE = WHERE + " WHERE ("; } else if (WHERE != null) { WHERE = WHERE + " OR "; } }
 
+        public static void FINDCONDITION(PurchaseOrderFilterModel filter)
+        {
+            WHERE = null;
+            if (filter.Pharma == true) { ChkStr(); WHERE = WHERE + "P.Pharma = 1 "; }
+            if (filter.Wellness == true) { ChkStr(); WHERE = WHERE + "P.Wellness = 1 "; }
+            if (filter.Online == true) { ChkStr(); WHERE = WHERE + "P.Online = 1 "; }
+            if (WHERE == null) { WHERE = "WHERE P.Pharma = 0 AND P.Wellness = 0 AND P.Online = 0 "; }
+            else { WHERE = WHERE + ")"; }
+        }
+        public static void FINDCOLUMN(PurchaseOrderFilterModel filter)
+        {
+            MarginPer = null; PurRate = null;
+            if (filter.SubTypeCode == 2 && filter.BranchTypeCode == 2) { MarginPer = "ISNULL(MP.MSMarginPer, 0)"; PurRate = "MP.MSPurRate"; }
+            else if (filter.SubTypeCode == 2 && filter.BranchTypeCode == 4) { MarginPer = "ISNULL(MP.WSMarginPer, 0)"; PurRate = "MP.WSPurRate"; }
+            else if (filter.SubTypeCode == 2 && filter.BranchTypeCode == 6) { MarginPer = "ISNULL(MP.OSMarginPer, 0)"; PurRate = "MP.OSPurRate"; }
+            else if (filter.SubTypeCode == 3 && filter.BranchTypeCode == 3) { MarginPer = "ISNULL(MP.MFMarginPer, 0)"; PurRate = "MP.MSPurRs"; }
+            else if (filter.SubTypeCode == 3 && filter.BranchTypeCode == 5) { MarginPer = "ISNULL(MP.WFMarginPer, 0)"; PurRate = "MP.WSPurRs"; }
+            else if (filter.SubTypeCode == 3 && filter.BranchTypeCode == 7) { MarginPer = "ISNULL(MP.OFMarginPer, 0)"; PurRate = "MP.OSPurRs"; }
+        }
+        public PurchaseOrderPagingModel PurchaseOrderList(PurchaseOrderFilterModel filter)
+        {
+            try
+            {
+                PurchaseOrderPagingModel mModel = new PurchaseOrderPagingModel();
+                PagingModel pModel = new PagingModel();
+                IQueryable<PurchaseOrderModel> purchaseOrder = new PurchaseOrderModel[] { }.AsQueryable();
+                FINDCONDITION(filter);
+                FINDCOLUMN(filter);
+                purchaseOrder = context.Database.SqlQuery<PurchaseOrderModel>("SELECT MP.ProductCode, P.ProductName As Product, MK.MktCompanyName As Company, P.GenericCode, MP.MRP, MP.SalRate, " + MarginPer + " AS Margin, " + PurRate + " AS PurchaseRs, P.Packing FROM dbo.MktCompanyMst AS MK INNER JOIN dbo.ProductMst AS P ON MK.MktCompanyCode = P.MktCompanyCode INNER JOIN(SELECT TOP(100) PERCENT ProductCode, MAX(MarginMstID) AS MarginMstID FROM dbo.MarginMst GROUP BY ProductCode ORDER BY ProductCode) AS MID ON P.ProductCode = MID.ProductCode INNER JOIN dbo.MarginMst AS MP ON MID.ProductCode = MP.ProductCode AND MID.MarginMstID = MP.MarginMstID " + WHERE + " GROUP BY MP.MRP, MP.SalRate, MP.ProductCode," + MarginPer + ", P.ProductName, MK.MktCompanyName, P.GenericCode, " + PurRate + ", P.Packing ORDER BY MP.ProductCode").AsQueryable();
+
+                // Get's No of Rows Count   
+                int count = purchaseOrder.Count();
+                // Parameter is passed from Query string if it is null then it default Value will be pageNumber:1  
+                int CurrentPage = filter.pageNumber;
+                // Parameter is passed from Query string if it is null then it default Value will be pageSize:20  
+                int PageSize = filter.pageSize;
+                // Display TotalCount to Records to User  
+                int TotalCount = count;
+                // Calculating Totalpage by Dividing (No of Records / Pagesize)  
+                int TotalPages = (int)Math.Ceiling(count / (double)PageSize);
+                // Returns List of Customer after applying Paging   
+                var items = purchaseOrder.Skip((CurrentPage - 1) * PageSize).Take(PageSize).ToList();
+
+                mModel.PurchaseOrderList = items;
+                pModel.pageNumber = CurrentPage;
+                pModel.TotalCount = TotalCount;
+                pModel.TotalPages = TotalPages;
+                mModel.PagingDetails = pModel;
+                return mModel;
+            }
+            catch (Exception ex)
+            {
+                ex.SetLog(ex.Message);
+                throw;
+            }
+
+        }
         #region IDisposable Support
         private bool disposedValue = false; // To detect redundant calls
 

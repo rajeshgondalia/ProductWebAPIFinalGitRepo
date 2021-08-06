@@ -11,5 +11,6 @@ namespace ProductWebAPI_Repository.ServiceContract
     public interface IProduct_Repository : IDisposable
     {
         ProductPagingModel ProductListCompanyWise(ProductFilterModel filter);
+        PurchaseOrderPagingModel PurchaseOrderList(PurchaseOrderFilterModel filter);
     }
 }

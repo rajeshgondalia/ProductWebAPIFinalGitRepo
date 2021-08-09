@@ -193,6 +193,85 @@ namespace ProductWebAPI_Repository.Service
             }
 
         }
+
+        public ReturnPOData InsertAddPODetails(SendPOModel model)
+        {
+            var data = new ReturnPOData();
+            if (model.SubTypeCode == 2)
+            {
+                var master = new PurchaseOrderMst()
+                {
+                    BranchCode = model.BranchCode,
+                    BranchTypeCode = model.BranchTypeCode,
+                    CompanyCode = model.CompanyCode,
+                    Ever = model.Ever,
+                    LogID = model.LogID,
+                    PcID = model.PcID,
+                    POCode = model.POCode,
+                    PODate = model.PODate,
+                    Rec = model.Rec,
+                    Sdate = model.Sdate,
+                    SendMail = model.SendMail,
+                    Sflag = model.Sflag
+                };
+                context.PurchaseOrderMsts.Add(master);
+                context.SaveChanges();
+                var childPO = model.PurchaseOrders.Select(x => new PurchaseOrderDet()
+                {
+                    Margin = x.Margin,
+                    MRP = x.MRP,
+                    OrderAmt = x.OrderAmt,
+                    ProductCode = x.ProductCode,
+                    Qty = x.Qty,
+                    Rec = x.Rec,
+                    SaleRate = x.SaleRate,
+                    Srno = x.Srno,
+                    PurchaseOrderMstID = master.PurchaseOrderMstID
+                }).ToList();
+                context.PurchaseOrderDets.AddRange(childPO);
+                context.SaveChanges();
+
+                return new ReturnPOData() { PurchaseOrderMstID = master.PurchaseOrderMstID, POCode = master.POCode };
+            }
+            else if (model.SubTypeCode == 3)
+            {
+                var master = new Med_PurchaseOrderMst()
+                {
+                    BranchCode = model.BranchCode,
+                    BranchTypeCode = model.BranchTypeCode,
+                    CompanyCode = model.CompanyCode,
+                    Ever = model.Ever,
+                    LogID = model.LogID,
+                    PcID = model.PcID,
+                    POCode = model.POCode,
+                    PODate = model.PODate,
+                    Rec = model.Rec,
+                    Sdate = model.Sdate,
+                    SendMail = model.SendMail,
+                    Sflag = model.Sflag
+                };
+                context.Med_PurchaseOrderMst.Add(master);
+                context.SaveChanges();
+                var childPO = model.PurchaseOrders.Select(x => new Med_PurchaseOrderDet()
+                {
+                    Margin = x.Margin,
+                    MRP = x.MRP,
+                    OrderAmt = x.OrderAmt,
+                    ProductCode = x.ProductCode,
+                    Qty = x.Qty,
+                    Rec = x.Rec,
+                    SaleRate = x.SaleRate,
+                    Srno = x.Srno,
+                    Med_PurchaseOrderMstID = master.Med_PurchaseOrderMstID
+                }).ToList();
+                context.Med_PurchaseOrderDet.AddRange(childPO);
+                context.SaveChanges();
+
+                return new ReturnPOData() { PurchaseOrderMstID = master.Med_PurchaseOrderMstID, POCode = master.POCode };
+            }
+            else
+                return new ReturnPOData() { PurchaseOrderMstID = 0, POCode = 0 };
+        }
         #region IDisposable Support
         private bool disposedValue = false; // To detect redundant calls
 

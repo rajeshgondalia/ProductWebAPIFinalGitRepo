@@ -12,5 +12,6 @@ namespace ProductWebAPI_Repository.ServiceContract
     {
         ProductPagingModel ProductListCompanyWise(ProductFilterModel filter);
         PurchaseOrderPagingModel PurchaseOrderList(PurchaseOrderFilterModel filter);
+        ReturnPOData InsertAddPODetails(SendPOModel model);
     }
 }

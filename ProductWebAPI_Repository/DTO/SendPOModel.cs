@@ -38,4 +38,10 @@ namespace ProductWebAPI_Repository.DTO
         public Nullable<int> Rec { get; set; }
         public Nullable<decimal> OrderAmt { get; set; }
     }
+
+    public class ReturnPOData
+    {
+        public int PurchaseOrderMstID { get; set; }
+        public Nullable<int> POCode { get; set; }
+    }
 }

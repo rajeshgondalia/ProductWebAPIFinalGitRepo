@@ -80,6 +80,64 @@ namespace ProductWebAPI.Controllers
             response.Content = new StringContent(returnData, Encoding.UTF8, "application/json");
             return response;
         }
+
+        [HttpPost]
+        public HttpResponseMessage SendPO(SendPOModel model)
+        {
+            string returnData = "";
+            //List<ProductPagingModel> productList = new List<ProductPagingModel>();
+            ReturnPOData pModel = new ReturnPOData();
+            JilResponse<ReturnPOData> Response = new JilResponse<ReturnPOData>();
+            try
+            {
+                var identity = (ClaimsIdentity)User.Identity;
+                var UserId = identity.Claims.Where(c => c.Type == "CrId").Select(c => c.Value).FirstOrDefault();
+                int CrId = Convert.ToInt32(UserId);
+                bool isAlreadyLogged = _IUser_Repository.CheckUserAvailableInLoginInfo(CrId);
+                if (isAlreadyLogged)
+                {
+                    if (model.PurchaseOrders.Count() == 50)
+                    {
+                        pModel = _IProduct_Repository.InsertAddPODetails(model);
+                        message = "SendPO List has been added!";
+                        status = true;
+                    }
+                    else if (model.PurchaseOrders.Count() > 50)
+                    {
+                        status = false;
+                        message = "You can't able to insert PO more than 50";
+                    }
+                    else if (model.PurchaseOrders.Count() < 50)
+                    {
+                        status = false;
+                        message = "You need to atleast insert 50 PO";
+                    }
+                }
+                else
+                {
+                    status = false;
+                    message = "UnAuthorized";
+                }
+            }
+            catch (Exception ex)
+            {
+                status = false;
+                message = "Bad Request!" + " - " + ex.ToString();
+                this._IError_Repository.InsertErrorLog(ex.ToString(), "SendPO", "Product/SendPO");
+            }
+            Response.status = status;
+            Response.Message = message;
+            Response.Result = pModel;
+
+            using (var output = new StringWriter())
+            {
+                Jil.JSON.Serialize(Response, output);
+                returnData = output.ToString();
+            }
+            var response = Request.CreateResponse(HttpStatusCode.OK);
+            response.Content = new StringContent(returnData, Encoding.UTF8, "application/json");
+            return response;
+        }
     }
 }
 

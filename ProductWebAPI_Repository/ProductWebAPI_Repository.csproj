@@ -328,6 +328,10 @@
     <Compile Include="DTO\MarginModel.cs" />
     <Compile Include="DTO\MenuModel.cs" />
     <Compile Include="DTO\PagingModel.cs" />
+    <Compile Include="DTO\POSBillResponseModel.cs" />
+    <Compile Include="DTO\POSDETModel.cs" />
+    <Compile Include="DTO\POSMstModel.cs" />
+    <Compile Include="DTO\POSRETDETModel.cs" />
     <Compile Include="DTO\ProductFilterModel.cs" />
     <Compile Include="DTO\ProductModel.cs" />
     <Compile Include="DTO\PurchaseOrderFilterModel.cs" />
@@ -341,6 +345,7 @@
     <Compile Include="ServiceContract\IMargin_Repository.cs" />
     <Compile Include="ServiceContract\IMenu_Repository.cs" />
     <Compile Include="ServiceContract\IOther_Repository.cs" />
+    <Compile Include="ServiceContract\IPOSBill_Repository.cs" />
     <Compile Include="ServiceContract\IProduct_Repository.cs" />
     <Compile Include="ServiceContract\IStock_Repository.cs" />
     <Compile Include="ServiceContract\IUser_Repository.cs" />
@@ -349,6 +354,7 @@
     <Compile Include="Service\Margin_Repository.cs" />
     <Compile Include="Service\Menu_Repository.cs" />
     <Compile Include="Service\Other_Repository.cs" />
+    <Compile Include="Service\POSBill_Repository.cs" />
     <Compile Include="Service\Product_Repository.cs" />
     <Compile Include="Service\Stock_Repository.cs" />
     <Compile Include="Service\User_Repository.cs" />

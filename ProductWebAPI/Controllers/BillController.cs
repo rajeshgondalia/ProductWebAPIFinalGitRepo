@@ -26,6 +26,7 @@ namespace ProductWebAPI.Controllers
         private IBill_Repository _IBill_Repository;
         private IError_Repository _IError_Repository;
         private IUser_Repository _IUser_Repository;
+        private IPOSBill_Repository _IPOSBill_Repository;
 
         public BillController()
         {
@@ -33,6 +34,7 @@ namespace ProductWebAPI.Controllers
             this._IBill_Repository = new Bill_Repository();
             this._IError_Repository = new Error_Repository();
             this._IUser_Repository = new User_Repository();
+            this._IPOSBill_Repository = new POSBill_Repository();
         }
 
         bool status = true;
@@ -246,5 +248,43 @@ namespace ProductWebAPI.Controllers
             return Emptyresponse;
         }
 
+        [HttpPost]
+        public HttpResponseMessage AddUpdatePOSBillAPI(List<POSMstModel> model)
+        {
+            JilResponse<POSBillResponseModel> blankResponse = new JilResponse<POSBillResponseModel>();
+            List<POSBillResponseModel> responselist = new List<POSBillResponseModel>();
+            string returnData = "";
+            try
+            {
+                responselist = _IPOSBill_Repository.InsertUpdatePOSBill(model);
+                if (responselist.Count > 0)
+                {
+                    status = true;
+                    message = "Insert Successfully!";
+                }
+                else
+                {
+                    status = true;
+                    message = "Please enter valid parameter!";
+                }
+            }
+            catch (Exception ex)
+            {
+                status = false;
+                message = "Bad Request!" + " - " + ex.ToString();
+                this._IError_Repository.InsertErrorLog(ex.ToString(), "AddUpdatePOSBillAPI", "Bill/AddUpdatePOSBillAPI");
+            }
+            blankResponse.status = status;
+            blankResponse.Message = message;
+            blankResponse.data = responselist;
+            using (var output = new StringWriter())
+            {
+                Jil.JSON.Serialize(blankResponse, output);
+                returnData = output.ToString();
+            }
+            var Emptyresponse = Request.CreateResponse(HttpStatusCode.OK);
+            Emptyresponse.Content = new StringContent(returnData, Encoding.UTF8, "application/json");
+            return Emptyresponse;
+        }
     }
 }

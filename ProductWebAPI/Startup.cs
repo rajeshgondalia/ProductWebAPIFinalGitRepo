@@ -35,7 +35,7 @@ namespace OauthApp
             {
                 AllowInsecureHttp = true,
                 TokenEndpointPath = new PathString("/api/User/Login"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromMinutes(525600),//token expiration time
+                AccessTokenExpireTimeSpan = TimeSpan.FromDays(7300),//token expiration time
                 Provider = new OauthProvider()
             };
 

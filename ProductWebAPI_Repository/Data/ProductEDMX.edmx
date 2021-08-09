@@ -963,6 +963,39 @@ warning 6002: The table/view 'MED_GENMED.dbo.MSpeer_originatorid_history' does n
           <Property Name="LeftImage" Type="nvarchar" MaxLength="50" />
           <Property Name="DescImage" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="PurchaseOrderDet">
+          <Key>
+            <PropertyRef Name="PurchaseOrderDetID" />
+          </Key>
+          <Property Name="PurchaseOrderDetID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PurchaseOrderMstID" Type="int" />
+          <Property Name="Srno" Type="int" />
+          <Property Name="ProductCode" Type="int" />
+          <Property Name="MRP" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="SaleRate" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Margin" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Qty" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Rec" Type="int" />
+          <Property Name="OrderAmt" Type="numeric" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="PurchaseOrderMst">
+          <Key>
+            <PropertyRef Name="PurchaseOrderMstID" />
+          </Key>
+          <Property Name="PurchaseOrderMstID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="POCode" Type="int" />
+          <Property Name="PODate" Type="datetime" />
+          <Property Name="BranchCode" Type="int" />
+          <Property Name="BranchTypeCode" Type="int" />
+          <Property Name="Rec" Type="tinyint" />
+          <Property Name="Sflag" Type="char" MaxLength="1" />
+          <Property Name="Sdate" Type="datetime" />
+          <Property Name="LogID" Type="int" />
+          <Property Name="PcID" Type="varchar" MaxLength="50" />
+          <Property Name="Ever" Type="int" />
+          <Property Name="CompanyCode" Type="int" />
+          <Property Name="SendMail" Type="bit" />
+        </EntityType>
         <EntityType Name="RackMst">
           <Key>
             <PropertyRef Name="RackCode" />
@@ -1793,6 +1826,18 @@ warning 6002: The table/view 'MED_GENMED.dbo.TmpGiftReportMst' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PurchaseOrderMst_BranchTypeMst">
+          <End Role="BranchTypeMst" Type="Self.BranchTypeMst" Multiplicity="0..1" />
+          <End Role="PurchaseOrderMst" Type="Self.PurchaseOrderMst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BranchTypeMst">
+              <PropertyRef Name="BranchTypeCode" />
+            </Principal>
+            <Dependent Role="PurchaseOrderMst">
+              <PropertyRef Name="BranchTypeCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SaleInvoiceDetID_SaleInvoiceDetID">
           <End Role="SaleInvoiceDet" Type="Self.SaleInvoiceDet" Multiplicity="1" />
           <End Role="SaleInvoiceDet1" Type="Self.SaleInvoiceDet" Multiplicity="0..1" />
@@ -2370,6 +2415,8 @@ warning 6002: The table/view 'MED_GENMED.dbo.TmpGiftReportMst' does not have a p
           <EntitySet Name="POSMst" EntityType="Self.POSMst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="POSRetDet" EntityType="Self.POSRetDet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductMst" EntityType="Self.ProductMst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PurchaseOrderDet" EntityType="Self.PurchaseOrderDet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PurchaseOrderMst" EntityType="Self.PurchaseOrderMst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RackMst" EntityType="Self.RackMst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReportMst" EntityType="Self.ReportMst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReportTypeMst" EntityType="Self.ReportTypeMst" Schema="dbo" store:Type="Tables" />
@@ -2521,6 +2568,10 @@ warning 6002: The table/view 'MED_GENMED.dbo.TmpGiftReportMst' does not have a p
           <AssociationSet Name="FK_Med_PurchaseReturnMst_BranchMst" Association="Self.FK_Med_PurchaseReturnMst_BranchMst">
             <End Role="BranchMst" EntitySet="BranchMst" />
             <End Role="Med_PurchaseReturnMst" EntitySet="Med_PurchaseReturnMst" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrderMst_BranchTypeMst" Association="Self.FK_PurchaseOrderMst_BranchTypeMst">
+            <End Role="BranchTypeMst" EntitySet="BranchTypeMst" />
+            <End Role="PurchaseOrderMst" EntitySet="PurchaseOrderMst" />
           </AssociationSet>
           <AssociationSet Name="FK_SaleInvoiceDetID_SaleInvoiceDetID" Association="Self.FK_SaleInvoiceDetID_SaleInvoiceDetID">
             <End Role="SaleInvoiceDet" EntitySet="SaleInvoiceDet" />
@@ -2692,6 +2743,7 @@ warning 6002: The table/view 'MED_GENMED.dbo.TmpGiftReportMst' does not have a p
           <Property Name="SortID" Type="Byte" />
           <Property Name="Active" Type="Boolean" />
           <NavigationProperty Name="Med_PurchaseOrderMst" Relationship="Self.FK_Med_PurchaseOrderMst_BranchTypeMst" FromRole="BranchTypeMst" ToRole="Med_PurchaseOrderMst" />
+          <NavigationProperty Name="PurchaseOrderMsts" Relationship="MED_GENMEDModel.FK_PurchaseOrderMst_BranchTypeMst" FromRole="BranchTypeMst" ToRole="PurchaseOrderMst" />
         </EntityType>
         <EntityType Name="CityMst">
           <Key>
@@ -4626,6 +4678,12 @@ warning 6002: The table/view 'MED_GENMED.dbo.TmpGiftReportMst' does not have a p
             <End Role="SaleReturnDet1" EntitySet="SaleReturnDets" />
           </AssociationSet>
           <EntitySet Name="GOrderConfirmMsts" EntityType="MED_GENMEDModel.GOrderConfirmMst" />
+          <EntitySet Name="PurchaseOrderDets" EntityType="MED_GENMEDModel.PurchaseOrderDet" />
+          <EntitySet Name="PurchaseOrderMsts" EntityType="MED_GENMEDModel.PurchaseOrderMst" />
+          <AssociationSet Name="FK_PurchaseOrderMst_BranchTypeMst" Association="MED_GENMEDModel.FK_PurchaseOrderMst_BranchTypeMst">
+            <End Role="BranchTypeMst" EntitySet="BranchTypeMsts" />
+            <End Role="PurchaseOrderMst" EntitySet="PurchaseOrderMsts" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ProductMst">
           <Key>
@@ -5110,6 +5168,52 @@ warning 6002: The table/view 'MED_GENMED.dbo.TmpGiftReportMst' does not have a p
           <Property Name="CompanyCode" Type="Int32" />
           <Property Name="Type" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="PurchaseOrderDet">
+          <Key>
+            <PropertyRef Name="PurchaseOrderDetID" />
+          </Key>
+          <Property Name="PurchaseOrderDetID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PurchaseOrderMstID" Type="Int32" />
+          <Property Name="Srno" Type="Int32" />
+          <Property Name="ProductCode" Type="Int32" />
+          <Property Name="MRP" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SaleRate" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Margin" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Qty" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Rec" Type="Int32" />
+          <Property Name="OrderAmt" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="PurchaseOrderMst">
+          <Key>
+            <PropertyRef Name="PurchaseOrderMstID" />
+          </Key>
+          <Property Name="PurchaseOrderMstID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="POCode" Type="Int32" />
+          <Property Name="PODate" Type="DateTime" Precision="3" />
+          <Property Name="BranchCode" Type="Int32" />
+          <Property Name="BranchTypeCode" Type="Int32" />
+          <Property Name="Rec" Type="Byte" />
+          <Property Name="Sflag" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Sdate" Type="DateTime" Precision="3" />
+          <Property Name="LogID" Type="Int32" />
+          <Property Name="PcID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Ever" Type="Int32" />
+          <Property Name="CompanyCode" Type="Int32" />
+          <Property Name="SendMail" Type="Boolean" />
+          <NavigationProperty Name="BranchTypeMst" Relationship="MED_GENMEDModel.FK_PurchaseOrderMst_BranchTypeMst" FromRole="PurchaseOrderMst" ToRole="BranchTypeMst" />
+        </EntityType>
+        <Association Name="FK_PurchaseOrderMst_BranchTypeMst">
+          <End Type="MED_GENMEDModel.BranchTypeMst" Role="BranchTypeMst" Multiplicity="0..1" />
+          <End Type="MED_GENMEDModel.PurchaseOrderMst" Role="PurchaseOrderMst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BranchTypeMst">
+              <PropertyRef Name="BranchTypeCode" />
+            </Principal>
+            <Dependent Role="PurchaseOrderMst">
+              <PropertyRef Name="BranchTypeCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -6920,6 +7024,41 @@ warning 6002: The table/view 'MED_GENMED.dbo.TmpGiftReportMst' does not have a p
                 <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
                 <ScalarProperty Name="PurchaseOrderMstID" ColumnName="PurchaseOrderMstID" />
                 <ScalarProperty Name="GOrderConfirmMstID" ColumnName="GOrderConfirmMstID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseOrderDets">
+            <EntityTypeMapping TypeName="MED_GENMEDModel.PurchaseOrderDet">
+              <MappingFragment StoreEntitySet="PurchaseOrderDet">
+                <ScalarProperty Name="OrderAmt" ColumnName="OrderAmt" />
+                <ScalarProperty Name="Rec" ColumnName="Rec" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="Margin" ColumnName="Margin" />
+                <ScalarProperty Name="SaleRate" ColumnName="SaleRate" />
+                <ScalarProperty Name="MRP" ColumnName="MRP" />
+                <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+                <ScalarProperty Name="Srno" ColumnName="Srno" />
+                <ScalarProperty Name="PurchaseOrderMstID" ColumnName="PurchaseOrderMstID" />
+                <ScalarProperty Name="PurchaseOrderDetID" ColumnName="PurchaseOrderDetID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseOrderMsts">
+            <EntityTypeMapping TypeName="MED_GENMEDModel.PurchaseOrderMst">
+              <MappingFragment StoreEntitySet="PurchaseOrderMst">
+                <ScalarProperty Name="SendMail" ColumnName="SendMail" />
+                <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+                <ScalarProperty Name="Ever" ColumnName="Ever" />
+                <ScalarProperty Name="PcID" ColumnName="PcID" />
+                <ScalarProperty Name="LogID" ColumnName="LogID" />
+                <ScalarProperty Name="Sdate" ColumnName="Sdate" />
+                <ScalarProperty Name="Sflag" ColumnName="Sflag" />
+                <ScalarProperty Name="Rec" ColumnName="Rec" />
+                <ScalarProperty Name="BranchTypeCode" ColumnName="BranchTypeCode" />
+                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+                <ScalarProperty Name="PODate" ColumnName="PODate" />
+                <ScalarProperty Name="POCode" ColumnName="POCode" />
+                <ScalarProperty Name="PurchaseOrderMstID" ColumnName="PurchaseOrderMstID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

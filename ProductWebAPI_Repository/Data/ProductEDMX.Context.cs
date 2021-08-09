@@ -104,6 +104,8 @@ namespace ProductWebAPI_Repository.Data
         public virtual DbSet<SaleReturnMst> SaleReturnMsts { get; set; }
         public virtual DbSet<ScheduleMst> ScheduleMsts { get; set; }
         public virtual DbSet<GOrderConfirmMst> GOrderConfirmMsts { get; set; }
+        public virtual DbSet<PurchaseOrderDet> PurchaseOrderDets { get; set; }
+        public virtual DbSet<PurchaseOrderMst> PurchaseOrderMsts { get; set; }
     
         public virtual int ProductMst_bulkdelete(Nullable<long> sync_min_timestamp, Nullable<int> sync_scope_local_id)
         {

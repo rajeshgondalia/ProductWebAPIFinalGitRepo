@@ -18,6 +18,7 @@ namespace ProductWebAPI_Repository.Data
         public BranchTypeMst()
         {
             this.Med_PurchaseOrderMst = new HashSet<Med_PurchaseOrderMst>();
+            this.PurchaseOrderMsts = new HashSet<PurchaseOrderMst>();
         }
     
         public int BranchTypeCode { get; set; }
@@ -29,5 +30,7 @@ namespace ProductWebAPI_Repository.Data
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Med_PurchaseOrderMst> Med_PurchaseOrderMst { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PurchaseOrderMst> PurchaseOrderMsts { get; set; }
     }
 }

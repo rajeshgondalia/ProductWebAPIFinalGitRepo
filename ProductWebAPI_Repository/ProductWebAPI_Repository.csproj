@@ -222,6 +222,12 @@
     <Compile Include="Data\ProductMst.cs">
       <DependentUpon>ProductEDMX.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\PurchaseOrderDet.cs">
+      <DependentUpon>ProductEDMX.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\PurchaseOrderMst.cs">
+      <DependentUpon>ProductEDMX.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\RackMst.cs">
       <DependentUpon>ProductEDMX.tt</DependentUpon>
     </Compile>

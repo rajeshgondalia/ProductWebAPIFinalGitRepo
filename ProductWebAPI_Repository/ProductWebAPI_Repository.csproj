@@ -326,6 +326,7 @@
     <Compile Include="DTO\ProductModel.cs" />
     <Compile Include="DTO\PurchaseOrderFilterModel.cs" />
     <Compile Include="DTO\PurchaseOrderModel.cs" />
+    <Compile Include="DTO\SendPOModel.cs" />
     <Compile Include="DTO\StockModel.cs" />
     <Compile Include="DTO\UserBranchModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -286,5 +286,44 @@ namespace ProductWebAPI.Controllers
             Emptyresponse.Content = new StringContent(returnData, Encoding.UTF8, "application/json");
             return Emptyresponse;
         }
+
+        [HttpPost]
+        public HttpResponseMessage GetAllPOSBillAPI(POSBillFilter model)
+        {
+            JilResponse<POSBILLGetModel> blankResponse = new JilResponse<POSBILLGetModel>();
+            List<POSBILLGetModel> responselist = new List<POSBILLGetModel>();
+            string returnData = "";
+            try
+            {
+                responselist = _IPOSBill_Repository.GetAllPOSBill(model);
+                if (responselist.Count > 0)
+                {
+                    status = true;
+                    message = "Insert Successfully!";
+                }
+                else
+                {
+                    status = true;
+                    message = "No Record Found!";
+                }
+            }
+            catch (Exception ex)
+            {
+                status = false;
+                message = "Bad Request!" + " - " + ex.ToString();
+                this._IError_Repository.InsertErrorLog(ex.ToString(), "GetAllPOSBillAPI", "Bill/GetAllPOSBillAPI");
+            }
+            blankResponse.status = status;
+            blankResponse.Message = message;
+            blankResponse.data = responselist;
+            using (var output = new StringWriter())
+            {
+                Jil.JSON.Serialize(blankResponse, output);
+                returnData = output.ToString();
+            }
+            var Emptyresponse = Request.CreateResponse(HttpStatusCode.OK);
+            Emptyresponse.Content = new StringContent(returnData, Encoding.UTF8, "application/json");
+            return Emptyresponse;
+        }
     }
 }

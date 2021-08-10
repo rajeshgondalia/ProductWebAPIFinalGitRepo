@@ -328,6 +328,8 @@
     <Compile Include="DTO\MarginModel.cs" />
     <Compile Include="DTO\MenuModel.cs" />
     <Compile Include="DTO\PagingModel.cs" />
+    <Compile Include="DTO\POSBillFilter.cs" />
+    <Compile Include="DTO\POSBILLGetModel.cs" />
     <Compile Include="DTO\POSBillResponseModel.cs" />
     <Compile Include="DTO\POSDETModel.cs" />
     <Compile Include="DTO\POSMstModel.cs" />

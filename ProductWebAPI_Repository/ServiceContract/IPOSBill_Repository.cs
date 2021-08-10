@@ -11,5 +11,7 @@ namespace ProductWebAPI_Repository.ServiceContract
     public interface IPOSBill_Repository : IDisposable
     {
         List<POSBillResponseModel> InsertUpdatePOSBill(List<POSMstModel> postlist);
+
+        List<POSBILLGetModel> GetAllPOSBill(POSBillFilter filter);
     }
 }

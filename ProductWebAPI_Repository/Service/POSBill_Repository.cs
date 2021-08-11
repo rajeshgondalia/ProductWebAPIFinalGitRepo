@@ -207,43 +207,62 @@ namespace ProductWebAPI_Repository.Service
             try
             {
                 List<POSBILLGetModel> posbilllist = new List<POSBILLGetModel>();
-                string str = "SELECT  TOP (100) PERCENT dbo.POSMst.POSMstID, dbo.POSMst.BranchCode, dbo.POSMst.BillNo, dbo.POSMst.BillDate, dbo.POSMst.PaymentTypeCode, dbo.POSMst.Sflag, dbo.POSMst.Sdate, dbo.POSMst.LogID, dbo.POSMst.PcID, " +
-                         "dbo.POSMst.Ever, dbo.POSMst.CompanyCode, dbo.POSMst.Type, dbo.POSMst.PatientName, dbo.POSMst.PatientAddress, dbo.POSMst.PatientMobNo, dbo.POSMst.DiseaseName, dbo.POSMst.DoctorName, " +
-                         "dbo.POSMst.DoctorAddress, dbo.POSMst.DoctorMobNo, dbo.POSMst.DegreeName, dbo.POSMst.RemDays, dbo.POSMst.RemDate, dbo.POSMst.Offer, dbo.POSMst.ChatID, dbo.POSMst.TotAmt, dbo.POSMst.PaidAmt, " +
-                         "dbo.POSMst.PendAmt, dbo.POSMst.EditCount, dbo.POSMst.GST, dbo.POSDet.POSDetID, dbo.POSDet.POSMstID AS DPOSMstID, dbo.POSDet.Srno, dbo.POSDet.BCode, dbo.POSDet.ProductCode, dbo.POSDet.BatchNo, " +
-                         "dbo.POSDet.Expiry, dbo.POSDet.Packing, dbo.POSDet.QtyInUnit, dbo.POSDet.QtyInStrip, dbo.POSDet.QtyInBox, dbo.POSDet.QtyInCartoon, dbo.POSDet.MRP, dbo.POSDet.SalRate, dbo.POSDet.SalAmt, dbo.POSDet.Disc, " +
-                         "dbo.POSDet.DiscAmt, dbo.POSDet.TaxCode, dbo.POSDet.Gst AS IGST, dbo.POSDet.GstAmt, dbo.POSDet.CGST, dbo.POSDet.CAMT, dbo.POSDet.SGST, dbo.POSDet.SAMT, dbo.POSDet.FreeProduct, dbo.POSDet.TotalAmt, " +
-                         "dbo.POSDet.MarginMstID, dbo.POSDet.Ret, dbo.POSDet.BranchCode AS DBranchCode, dbo.POSDet.BillNo AS DBillNo, dbo.POSDet.ProfitRate, dbo.POSDet.ProfitAmt, dbo.POSRetDet.POSRetDetID, " +
-                         "dbo.POSRetDet.POSMstID AS RPOSMstID, dbo.POSRetDet.RetBillNo, dbo.POSRetDet.Srno AS RSrno, dbo.POSRetDet.BCode AS RBCode, dbo.POSRetDet.ProductCode AS RProductCode, dbo.POSRetDet.BatchNo AS RBatchNo, " +
-                         "dbo.POSRetDet.Expiry AS Expr10, dbo.POSRetDet.Packing AS RExpiry, dbo.POSRetDet.QtyInUnit AS RQtyInUnit, dbo.POSRetDet.QtyInStrip AS RQtyInStrip, dbo.POSRetDet.QtyInBox AS RQtyInBox, " +
-                         "dbo.POSRetDet.QtyInCartoon AS RQtyInCartoon, dbo.POSRetDet.MRP AS RMRP, dbo.POSRetDet.SalRate AS RSalRate, dbo.POSRetDet.SalAmt AS RSalAmt, dbo.POSRetDet.Disc AS RDisc, dbo.POSRetDet.DiscAmt AS RDiscAmt, " +
-                         "dbo.POSRetDet.TaxCode AS RTaxCode, dbo.POSRetDet.Gst AS RGst, dbo.POSRetDet.GstAmt AS RGstAmt, dbo.POSRetDet.CGST AS RCGST, dbo.POSRetDet.CAMT AS RCAMT, dbo.POSRetDet.SGST AS RSGST, " +
-                         "dbo.POSRetDet.SAMT AS RSAMT, dbo.POSRetDet.FreeProduct AS RFreeProduct, dbo.POSRetDet.TotalAmt AS RTotalAmt, dbo.POSRetDet.MarginMstID AS RMarginMstID, dbo.POSRetDet.BranchCode AS RBranchCode, " +
-                         "dbo.POSRetDet.BillNo AS RBillNo, dbo.POSRetDet.ProfitRate AS RProfitRate, dbo.POSRetDet.ProfitAmt AS RProfitAmt " +
-                         " FROM            dbo.POSMst LEFT OUTER JOIN " +
-                         "dbo.POSRetDet ON dbo.POSMst.POSMstID = dbo.POSRetDet.POSMstID AND dbo.POSMst.BranchCode = dbo.POSRetDet.BranchCode AND dbo.POSMst.BillNo = dbo.POSRetDet.BillNo LEFT OUTER JOIN " +
-                         "dbo.POSDet ON dbo.POSMst.POSMstID = dbo.POSDet.POSMstID AND dbo.POSMst.BranchCode = dbo.POSDet.BranchCode AND dbo.POSMst.BillNo = dbo.POSDet.BillNo " +
-"WHERE  dbo.POSMst.BranchCode = " + filter.BranchCode + " or CONVERT(date, dbo.POSMst.BillDate) between CONVERT(date, '" + filter.FromDate + "') and CONVERT(date, '" + filter.ToDate + "') " +
-"ORDER BY dbo.POSMst.BillDate, dbo.POSMst.BillNo";
+                List<POSMstModel> pmList = new List<POSMstModel>();
+                List<POSDet> pdList = new List<POSDet>();
+                List<POSRetDet> prdList = new List<POSRetDet>();
 
-                posbilllist = context.Database.SqlQuery<POSBILLGetModel>("SELECT  TOP (100) PERCENT dbo.POSMst.POSMstID, dbo.POSMst.BranchCode, dbo.POSMst.BillNo, dbo.POSMst.BillDate, dbo.POSMst.PaymentTypeCode, dbo.POSMst.Sflag, dbo.POSMst.Sdate, dbo.POSMst.LogID, dbo.POSMst.PcID, " +
+                pmList = context.Database.SqlQuery<POSMstModel>("SELECT  TOP (100) PERCENT dbo.POSMst.POSMstID, dbo.POSMst.BranchCode, dbo.POSMst.BillNo, dbo.POSMst.BillDate, dbo.POSMst.PaymentTypeCode, dbo.POSMst.Sflag, dbo.POSMst.Sdate, dbo.POSMst.LogID, dbo.POSMst.PcID, " +
                          "dbo.POSMst.Ever, dbo.POSMst.CompanyCode, dbo.POSMst.Type, dbo.POSMst.PatientName, dbo.POSMst.PatientAddress, dbo.POSMst.PatientMobNo, dbo.POSMst.DiseaseName, dbo.POSMst.DoctorName, " +
                          "dbo.POSMst.DoctorAddress, dbo.POSMst.DoctorMobNo, dbo.POSMst.DegreeName, dbo.POSMst.RemDays, dbo.POSMst.RemDate, dbo.POSMst.Offer, dbo.POSMst.ChatID, dbo.POSMst.TotAmt, dbo.POSMst.PaidAmt, " +
-                         "dbo.POSMst.PendAmt, dbo.POSMst.EditCount, dbo.POSMst.GST, dbo.POSDet.POSDetID, dbo.POSDet.POSMstID AS DPOSMstID, dbo.POSDet.Srno, dbo.POSDet.BCode, dbo.POSDet.ProductCode, dbo.POSDet.BatchNo, " +
-                         "dbo.POSDet.Expiry, dbo.POSDet.Packing, dbo.POSDet.QtyInUnit, dbo.POSDet.QtyInStrip, dbo.POSDet.QtyInBox, dbo.POSDet.QtyInCartoon, dbo.POSDet.MRP, dbo.POSDet.SalRate, dbo.POSDet.SalAmt, dbo.POSDet.Disc, " +
-                         "dbo.POSDet.DiscAmt, dbo.POSDet.TaxCode, dbo.POSDet.Gst AS IGST, dbo.POSDet.GstAmt, dbo.POSDet.CGST, dbo.POSDet.CAMT, dbo.POSDet.SGST, dbo.POSDet.SAMT, dbo.POSDet.FreeProduct, dbo.POSDet.TotalAmt, " +
-                         "dbo.POSDet.MarginMstID, dbo.POSDet.Ret, dbo.POSDet.BranchCode AS DBranchCode, dbo.POSDet.BillNo AS DBillNo, dbo.POSDet.ProfitRate, dbo.POSDet.ProfitAmt, dbo.POSRetDet.POSRetDetID, " +
-                         "dbo.POSRetDet.POSMstID AS RPOSMstID, dbo.POSRetDet.RetBillNo, dbo.POSRetDet.Srno AS RSrno, dbo.POSRetDet.BCode AS RBCode, dbo.POSRetDet.ProductCode AS RProductCode, dbo.POSRetDet.BatchNo AS RBatchNo, " +
-                         "dbo.POSRetDet.Expiry AS Expr10, dbo.POSRetDet.Packing AS RExpiry, dbo.POSRetDet.QtyInUnit AS RQtyInUnit, dbo.POSRetDet.QtyInStrip AS RQtyInStrip, dbo.POSRetDet.QtyInBox AS RQtyInBox, " +
-                         "dbo.POSRetDet.QtyInCartoon AS RQtyInCartoon, dbo.POSRetDet.MRP AS RMRP, dbo.POSRetDet.SalRate AS RSalRate, dbo.POSRetDet.SalAmt AS RSalAmt, dbo.POSRetDet.Disc AS RDisc, dbo.POSRetDet.DiscAmt AS RDiscAmt, " +
-                         "dbo.POSRetDet.TaxCode AS RTaxCode, dbo.POSRetDet.Gst AS RGst, dbo.POSRetDet.GstAmt AS RGstAmt, dbo.POSRetDet.CGST AS RCGST, dbo.POSRetDet.CAMT AS RCAMT, dbo.POSRetDet.SGST AS RSGST, " +
-                         "dbo.POSRetDet.SAMT AS RSAMT, dbo.POSRetDet.FreeProduct AS RFreeProduct, dbo.POSRetDet.TotalAmt AS RTotalAmt, dbo.POSRetDet.MarginMstID AS RMarginMstID, dbo.POSRetDet.BranchCode AS RBranchCode, " +
-                         "dbo.POSRetDet.BillNo AS RBillNo, dbo.POSRetDet.ProfitRate AS RProfitRate, dbo.POSRetDet.ProfitAmt AS RProfitAmt " +
-                         " FROM            dbo.POSMst LEFT OUTER JOIN " +
-                         "dbo.POSRetDet ON dbo.POSMst.POSMstID = dbo.POSRetDet.POSMstID AND dbo.POSMst.BranchCode = dbo.POSRetDet.BranchCode AND dbo.POSMst.BillNo = dbo.POSRetDet.BillNo LEFT OUTER JOIN " +
-                         "dbo.POSDet ON dbo.POSMst.POSMstID = dbo.POSDet.POSMstID AND dbo.POSMst.BranchCode = dbo.POSDet.BranchCode AND dbo.POSMst.BillNo = dbo.POSDet.BillNo " +
+                         "dbo.POSMst.PendAmt, dbo.POSMst.EditCount, dbo.POSMst.GST " +
+                         "FROM            dbo.POSMst " +
 "WHERE  dbo.POSMst.BranchCode = " + filter.BranchCode + " or CONVERT(date, dbo.POSMst.BillDate) between CONVERT(date, '" + filter.FromDate + "') and CONVERT(date, '" + filter.ToDate + "') " +
 "ORDER BY dbo.POSMst.BillDate, dbo.POSMst.BillNo").ToList();
+
+                if (pmList.Count > 0)
+                {
+                    foreach (var pm in pmList)
+                    {
+                        POSBILLGetModel posbillModel = new POSBILLGetModel();
+                        posbillModel.BillDate = pm.BillDate;
+                        posbillModel.BillNo = pm.BillNo;
+                        posbillModel.BranchCode = pm.BranchCode;
+                        posbillModel.ChatID = pm.ChatID;
+                        posbillModel.CompanyCode = pm.CompanyCode;
+                        posbillModel.DegreeName = pm.DegreeName;
+                        posbillModel.DiseaseName = pm.DiseaseName;
+                        posbillModel.DoctorAddress = pm.DoctorAddress;
+                        posbillModel.DoctorMobNo = pm.DoctorMobNo;
+                        posbillModel.DoctorName = pm.DoctorName;
+                        posbillModel.EditCount = pm.EditCount;
+                        posbillModel.Ever = pm.Ever;
+                        posbillModel.GST = pm.GST;
+                        posbillModel.LogID = pm.LogID;
+                        posbillModel.Offer = pm.Offer;
+                        posbillModel.PaidAmt = pm.PaidAmt;
+                        posbillModel.PatientAddress = pm.PatientAddress;
+                        posbillModel.PatientMobNo = pm.PatientMobNo;
+                        posbillModel.PatientName = pm.PatientName;
+                        posbillModel.PaymentTypeCode = pm.PaymentTypeCode;
+                        posbillModel.PcID = pm.PcID;
+                        posbillModel.PendAmt = pm.PendAmt;
+                        posbillModel.POSMstID = pm.POSMstID;
+                        posbillModel.RemDate = pm.RemDate;
+                        posbillModel.RemDays = pm.RemDays;
+                        posbillModel.Sdate = pm.Sdate;
+                        posbillModel.Sflag = pm.Sflag;
+                        posbillModel.TotAmt = pm.TotAmt;
+                        posbillModel.Type = pm.Type;
+
+                        pdList = context.POSDets.Where(x => x.POSMstID == pm.POSMstID).ToList();
+                        posbillModel.POSDELData = pdList;
+
+                        prdList = context.POSRetDets.Where(x => x.POSMstID == pm.POSMstID).ToList();
+                        posbillModel.POSRETDETData = prdList;
+
+                        posbilllist.Add(posbillModel);
+                    }
+                } 
                 return posbilllist;
             }
             catch (Exception ex)

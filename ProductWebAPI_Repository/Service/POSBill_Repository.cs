@@ -253,6 +253,40 @@ namespace ProductWebAPI_Repository.Service
             }
         }
 
+        public void DeletePOSBill(List<POSBillResponseModel> model)
+        {
+            using (var dbContextTransaction = context.Database.BeginTransaction())
+            {
+                try
+                {
+                    foreach (var pm in model)
+                    {
+                        var posmst = context.POSMsts.Where(x => x.POSMstID == pm.POSMstID && x.BillNo == pm.BillNo && x.BranchCode == pm.BranchCode).FirstOrDefault();
+                        if (posmst != null)
+                        {
+                            var posdet = context.POSDets.Where(x => x.POSMstID == posmst.POSMstID).ToList();
+                            context.POSDets.RemoveRange(posdet);
+                            context.SaveChanges();
+
+                            var posretdet = context.POSRetDets.Where(x => x.POSMstID == posmst.POSMstID).ToList();
+                            context.POSRetDets.RemoveRange(posretdet);
+                            context.SaveChanges();
+
+                            context.POSMsts.Remove(posmst);
+                            context.SaveChanges();
+                        }
+                    }
+                    dbContextTransaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    dbContextTransaction.Rollback();
+                    ex.SetLog(ex.Message);
+                    throw;
+                }
+            } 
+        }
+
         #region IDisposable Support
         private bool disposedValue = false; // To detect redundant calls
 
@@ -274,5 +308,5 @@ namespace ProductWebAPI_Repository.Service
             GC.SuppressFinalize(this);
         }
         #endregion
-    }
+    } 
 }

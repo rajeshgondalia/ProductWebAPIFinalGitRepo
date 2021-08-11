@@ -325,5 +325,54 @@ namespace ProductWebAPI.Controllers
             Emptyresponse.Content = new StringContent(returnData, Encoding.UTF8, "application/json");
             return Emptyresponse;
         }
+
+        [HttpPost]
+        public HttpResponseMessage DeletePOSBillAPI(List<POSBillResponseModel> model)
+        {
+            JilResponse<string> blankResponse = new JilResponse<string>();
+            string returnData = "";
+            try
+            {
+                var identity = (ClaimsIdentity)User.Identity;
+                var UserId = identity.Claims.Where(c => c.Type == "CrId").Select(c => c.Value).FirstOrDefault();
+                int CrId = Convert.ToInt32(UserId);
+                bool isAlreadyLogged = _IUser_Repository.CheckUserAvailableInLoginInfo(CrId);
+                if (isAlreadyLogged)
+                {
+                    if (model.Count > 0)
+                    {
+                        _IPOSBill_Repository.DeletePOSBill(model);
+                        status = true;
+                        message = "Deleted Successfully!";
+                    }
+                    else
+                    {
+                        status = true;
+                        message = "Please pass the parameter!";
+                    }
+                }
+                else
+                {
+                    status = false;
+                    message = "UnAuthorized";
+                }
+            }
+            catch (Exception ex)
+            {
+                status = false;
+                message = "Bad Request!" + " - " + ex.ToString();
+                this._IError_Repository.InsertErrorLog(ex.ToString(), "DeletePOSBillAPI", "Bill/DeletePOSBillAPI");
+            }
+            blankResponse.status = status;
+            blankResponse.Message = message;
+            using (var output = new StringWriter())
+            {
+                Jil.JSON.Serialize(blankResponse, output);
+                returnData = output.ToString();
+            }
+            var Emptyresponse = Request.CreateResponse(HttpStatusCode.OK);
+            Emptyresponse.Content = new StringContent(returnData, Encoding.UTF8, "application/json");
+            return Emptyresponse;
+        }
     }
 }

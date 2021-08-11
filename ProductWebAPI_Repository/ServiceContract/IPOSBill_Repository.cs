@@ -13,5 +13,7 @@ namespace ProductWebAPI_Repository.ServiceContract
         List<POSBillResponseModel> InsertUpdatePOSBill(List<POSMstModel> postlist);
 
         List<POSBILLGetModel> GetAllPOSBill(POSBillFilter filter);
+
+        void DeletePOSBill(List<POSBillResponseModel> model);
     }
 }

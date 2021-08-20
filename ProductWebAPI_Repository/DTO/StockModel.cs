@@ -12,4 +12,8 @@ namespace ProductWebAPI_Repository.DTO
         public string ProductName { get; set; }
         public string MktCompanyName { get; set; }
     }
+    public class StockPostModal
+    {
+        public int productCode { get; set; }
+    }
 }

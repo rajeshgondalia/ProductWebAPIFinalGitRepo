@@ -35,8 +35,8 @@ namespace ProductWebAPI.Controllers
         bool status = true;
         string message = string.Empty;
 
-        [HttpGet]
-        public HttpResponseMessage GetStockiestStock(int productCode)
+        [HttpPost]
+        public HttpResponseMessage GetStockiestStock(StockPostModal model)
         {
             string returnData = "";
             JilResponse<StockModel> Response = new JilResponse<StockModel>();
@@ -50,7 +50,7 @@ namespace ProductWebAPI.Controllers
                 bool isAlreadyLogged = _IUser_Repository.CheckUserAvailableInLoginInfo(CrId);
                 if (isAlreadyLogged)
                 {
-                    stock = _IStock_Repository.GetStockStockist(productCode);
+                    stock = _IStock_Repository.GetStockStockist(model.productCode);
                     message = "Stockiest Stock Record Fetched!";
                     status = true;
                 }
@@ -80,8 +80,8 @@ namespace ProductWebAPI.Controllers
             response.Content = new StringContent(returnData, Encoding.UTF8, "application/json");
             return response;
         }
-        [HttpGet]
-        public HttpResponseMessage GetGenmedStock(int productCode)
+        [HttpPost]
+        public HttpResponseMessage GetGenmedStock(StockPostModal model)
         {
             string returnData = "";
             JilResponse<StockModel> Response = new JilResponse<StockModel>();
@@ -94,7 +94,7 @@ namespace ProductWebAPI.Controllers
                 bool isAlreadyLogged = _IUser_Repository.CheckUserAvailableInLoginInfo(CrId);
                 if (isAlreadyLogged)
                 {
-                    stock = _IStock_Repository.GetStockGenmed(productCode);
+                    stock = _IStock_Repository.GetStockGenmed(model.productCode);
                     message = "Genmed Stock Record Fetched!";
                     status = true;
                 }
